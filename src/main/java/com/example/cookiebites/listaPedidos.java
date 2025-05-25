@@ -1,12 +1,10 @@
-package com.example;
+package com.example.cookiebites;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 import org.yaml.snakeyaml.util.Tuple;
-
-import com.Pedido;
 
 import jakarta.annotation.PostConstruct;
 
