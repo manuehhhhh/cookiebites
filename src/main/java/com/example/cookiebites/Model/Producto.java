@@ -1,4 +1,4 @@
-package Model;
+package com.example.cookiebites.Model;
 
 import java.util.ArrayList;
 import org.springframework.stereotype.Component;
@@ -8,12 +8,11 @@ import java.lang.String;
 public class Producto {
     public String nombre;
     public double precio;
-    public ArrayList<String> ingredientes;
+    public ArrayList<String> ingredientes = new ArrayList<>();
 
 
-    public Producto(){
+    public Producto(){}
 
-    }
     public Producto(String nombre, double precio, ArrayList<String> ingredientes){
         this.nombre = nombre;
         this.precio = precio;

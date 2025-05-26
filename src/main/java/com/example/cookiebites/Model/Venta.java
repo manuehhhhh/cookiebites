@@ -1,4 +1,4 @@
-package Model;
+package com.example.cookiebites.Model;
 
 public class Venta {
     private Pedido pedido;

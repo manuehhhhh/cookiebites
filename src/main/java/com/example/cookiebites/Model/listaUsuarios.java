@@ -1,4 +1,4 @@
-package Model;
+package com.example.cookiebites.Model;
 
 import java.util.ArrayList;
 

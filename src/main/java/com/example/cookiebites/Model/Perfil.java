@@ -1,4 +1,4 @@
-package Model;
+package com.example.cookiebites.Model;
 
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.util.Tuple;
