@@ -1,7 +1,7 @@
-package com.example.cookiebites;
+package Controller;
 
 import java.util.ArrayList;
-
+import Model.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,30 +10,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class ControladorProductos {
-    @Autowired
-    private listaProductos lista;
+import Model.listaPedidos;
 
+@RestController
+public class controladorPedidos {
     @Autowired
-    public ControladorProductos(listaProductos list){
-        this.lista = list;
-        System.out.println("creado el controlador");
+    private listaPedidos lista;
+    
+    @Autowired
+    public controladorPedidos(listaPedidos lista){
+        this.lista = lista;
     }
 
-    @GetMapping("/productos")
-    ArrayList<Producto> findAll(){
+    @GetMapping("/pedidos")
+    ArrayList<Pedido> findAll(){
         System.out.println(this.lista);
         return this.lista.findAll();
     }
 
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("productos/crear")
-    public void agregarProducto(@RequestBody Producto prod){
-        System.out.println(prod.toString());
-        this.lista.save(prod);
+    @PostMapping("pedido/crear")
+    public void agregarProducto(@RequestBody Pedido ped){
+        System.out.println(ped.toString());
+        this.lista.save(ped);
     }
-
-    
 }
