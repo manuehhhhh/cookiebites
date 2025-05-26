@@ -13,7 +13,7 @@ public class Pedido {
     public ArrayList<Tuple<String, Integer>> carrito;
     public LocalDate fechaDeEntrega;
     public boolean confirmado;
-    
+    public int total;
     public Pedido(){
     }
 
@@ -22,5 +22,15 @@ public class Pedido {
         this.direccion = direccion;
         this.carrito = carrito;
         this.fechaDeEntrega = fechaDeEntrega;
+        this.total = calcularTotal();
     }
+
+    private int calcularTotal(){
+        int acum = 0;
+        for (Tuple<String,Integer> tuple : carrito) {
+            // acum+= tuple._2() * 
+        }
+        return acum;
+    }
+
 }

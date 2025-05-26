@@ -1,4 +1,4 @@
-package com.example;
+package com.example.cookiebites;
 
 import java.util.ArrayList;
 
@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.cookiebites.Pedido;
-import com.example.cookiebites.listaPedidos;
 
 @RestController
 public class controladorPedidos {
