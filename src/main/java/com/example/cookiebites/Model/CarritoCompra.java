@@ -8,8 +8,7 @@ public class CarritoCompra {
 
     public CarritoCompra(){}
 
-    public void agregarCarrito(Producto pro, int cant) {
-        CarritoItem item = new CarritoItem(pro, cant);
+    public void agregarCarrito(CarritoItem item) {
         this.carrito.add(item);
     }
 
