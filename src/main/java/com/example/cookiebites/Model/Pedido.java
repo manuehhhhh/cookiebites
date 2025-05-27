@@ -16,12 +16,13 @@ public class Pedido {
     
     public Pedido(){}
 
-    public Pedido(String nombreUsuario, String direccion, LocalDate fechaDeEntrega, EstadoPedido estado){
+    public Pedido(String nombreUsuario, String direccion,CarritoCompra carrito,ArrayList<CarritoItem> compra, LocalDate fechaDeEntrega, EstadoPedido estado){
         this.nombreUsuario = nombreUsuario;
         this.direccion = direccion;
         this.fechaDeEntrega = fechaDeEntrega;
         this.estado = estado;
-        this.compra = carrito.findAll();
+        this.carrito = carrito;
+        this.compra = compra;
         this.total = carrito.totalPagar();
     }
 
