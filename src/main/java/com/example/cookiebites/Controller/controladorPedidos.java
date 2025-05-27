@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cookiebites.Model.Pedido;
-import com.example.cookiebites.Repository.listaPedidos;
+import com.example.cookiebites.Repository.ListaPedidos;
 
 @RestController
-public class controladorPedidos {
+public class ControladorPedidos {
     @Autowired
-    private listaPedidos lista;
+    private ListaPedidos lista;
     
 
-    public controladorPedidos(listaPedidos lista){
+    public ControladorPedidos(ListaPedidos lista){
         this.lista = lista;
     }
 
-   /*  @GetMapping("/pedidos")
+    @GetMapping("/pedidos")
     ArrayList<Pedido> findAll(){
         System.out.println(this.lista);
         return this.lista.findAll();
@@ -35,5 +35,5 @@ public class controladorPedidos {
     public void agregarProducto(@RequestBody Pedido ped){
         System.out.println(ped.toString());
         this.lista.save(ped);
-    }*/
+    }
 }

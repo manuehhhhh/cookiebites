@@ -11,13 +11,13 @@ import com.example.cookiebites.Model.Pedido;
 import jakarta.annotation.PostConstruct;
 
 @Repository
-public class listaPedidos {
+public class ListaPedidos {
     private ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
-
+   
     @PostConstruct
     private void init(){
         System.err.println("Lista Perfil creada");
-        listaPedidos.add(new Pedido("Manuel12", "barquisimeto, Av principal", new ArrayList<Tuple<String, Integer>>(), LocalDate.now()));
+        listaPedidos.add(new Pedido("Manuel12", "barquisimeto, Av principal", /*new ArrayList<Tuple<String, Integer>>(),*/ LocalDate.now()));
     }
 
     public ArrayList<Pedido> findAll(){

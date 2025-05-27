@@ -2,8 +2,6 @@ package com.example.cookiebites.Repository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
-import com.example.cookiebites.Model.Perfil;
 import com.example.cookiebites.Model.Producto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,20 +12,16 @@ import java.io.File;
 
 
 @Repository
-public class listaProductos {
+public class ListaProductos {
 
     @Value("${productos.json.path}")
     private String productosJsonPath;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
-
+    
     @PostConstruct
     public  void init(){
         this.listaProductos = leerProductos();
-        listaProductos.forEach(galleta -> 
-                System.out.println("Nombre: " + galleta.getNombre() +
-                ", Precio: " + galleta.getPrecio() +
-                ", Ingredientes: " + galleta.getIngredientes())
-            );
+        System.out.println("Lista Productos creada");
     }
 
     public ArrayList<Producto> leerProductos() {
@@ -55,22 +49,13 @@ public class listaProductos {
         }
     }
 
-    public Producto consultaProducto(String dato) {
-        Producto productoEncontrado = new Producto();
+    public Producto consultaProducto(String nombre) {
         for (Producto pro : listaProductos) {
-            if (pro.nombre.equalsIgnoreCase(dato)) {
-                productoEncontrado = pro;
+            if (pro.getNombre().equalsIgnoreCase(nombre)) {
+                return pro;
             }
         }
-        return productoEncontrado;
-    }
-
-    public ArrayList<Producto> getListaProducto() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(ArrayList<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
+        return null;
     }
 
     public ArrayList<Producto> findAll(){

@@ -1,0 +1,38 @@
+[
+  {
+    "pedido": {
+      "nombre_de_usuario": "CarlosGomez",
+      "direccion": "Calle 5, Caracas, Venezuela",
+      "fecha_de_entrega": "2025-06-02",
+      "estado": "en proceso"
+    },
+    "banco": "Banco Central",
+    "cedula": "98765432",
+    "numero_de_telefono": "+58 4145678901",
+    "numero_de_referencia": "XYZ987654"
+  },
+  {
+    "pedido": {
+      "nombre_de_usuario": "MariaLopez",
+      "direccion": "Av. Bolívar #456, Valencia, Venezuela",
+      "fecha_de_entrega": "2025-06-03",
+      "estado": "lista"
+    },
+    "banco": "Banco Provincial",
+    "cedula": "45678912",
+    "numero_de_telefono": "+58 4123456789",
+    "numero_de_referencia": "LMN456789"
+  },
+  {
+    "pedido": {
+      "nombre_de_usuario": "JoseMartinez",
+      "direccion": "Urbanización San Ignacio, Maracaibo, Venezuela",
+      "fecha_de_entrega": "2025-06-04",
+      "estado": "orden recibida"
+    },
+    "banco": "Banco Mercantil",
+    "cedula": "32165487",
+    "numero_de_telefono": "+58 4167890123",
+    "numero_de_referencia": "JKL321654"
+  }
+]
