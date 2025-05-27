@@ -2,7 +2,11 @@ package com.example.cookiebites.Controller;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import com.example.cookiebites.Model.Venta;
 import com.example.cookiebites.Repository.ListaVentas;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +26,12 @@ public class ControladorVentas {
     ArrayList<Venta> findAll(){
         System.out.println(this.listaVentas);
         return this.listaVentas.findAll();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("ventas/registrar")
+    public void agregarVenta(@RequestBody Venta ven){
+        System.out.println(ven.toString());
+        this.listaVentas.save(ven);
     }
 }

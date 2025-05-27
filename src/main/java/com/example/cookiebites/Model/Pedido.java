@@ -15,8 +15,7 @@ public class Pedido {
     public boolean confirmado;
     public int total;
     
-    public Pedido(){
-    }
+    public Pedido(){}
 
     public Pedido(String nombreUsuario, String direccion, /*ArrayList<Tuple<String, Integer>> carrito,*/ LocalDate fechaDeEntrega){
         this.nombreUsuario = nombreUsuario;

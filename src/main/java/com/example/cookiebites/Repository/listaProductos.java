@@ -64,5 +64,6 @@ public class ListaProductos {
 
     public void save(Producto prod){
         this.listaProductos.add(prod);
+        actualizarProductos();
     }
 }

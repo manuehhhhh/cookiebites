@@ -50,6 +50,18 @@ public class ListaUsuarios {
         return listaPerfiles;
     }
 
+    public void crearPerfil(Perfil per) {
+        boolean existe = false;
+        for (Perfil usuario : this.listaPerfiles) {
+            if (usuario.nombreUsuario.equals(per.nombreUsuario)) {
+                //EL USUARIO YA EXISTE
+                System.err.println("El usuario ya existe");
+                existe = true;
+            }
+        }
+        if (!existe) save(per);
+    }
+
     public Perfil consultaPerfil(String dato) {
         Perfil usuarioEncontrado = new Perfil();
         for (Perfil usuario : listaPerfiles) {

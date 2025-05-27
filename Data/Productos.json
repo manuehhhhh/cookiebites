@@ -65,5 +65,15 @@
     "nombre": "Galleta de Café",
     "precio": 3.0,
     "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Café soluble"]
+  },
+  {
+    "nombre": "Galleta con chispas",
+    "precio": 2.0,
+    "ingredientes": ["chispas", "Harina", "Azúcar", "Mantequilla"]
+  },
+  {
+    "nombre": "Galleta marmoleada",
+    "precio": 2.0,
+    "ingredientes": ["chocolate", "Harina", "Azúcar", "Mantequilla", "vainilla"]
   }
 ]

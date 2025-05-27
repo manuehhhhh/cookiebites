@@ -1,11 +1,11 @@
 package com.example.cookiebites.Model;
 
 public class Venta {
-    private Pedido pedido;
-    private String banco;
-    private int cedula;
-    private int numRef;
-    private int numTelf;
+    public Pedido pedido;
+    public String banco;
+    public int cedula;
+    public int numRef;
+    public int numTelf;
 
     public Venta(){
 
@@ -17,10 +17,6 @@ public class Venta {
         this.cedula = cedula;
         this.numRef = numRef;
         this.numTelf = numTelf;
-    }
-
-    public void registrarVenta(){
-        
     }
 
     public String getBanco() {
