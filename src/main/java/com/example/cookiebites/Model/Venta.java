@@ -7,9 +7,7 @@ public class Venta {
     public int numRef;
     public int numTelf;
 
-    public Venta(){
-
-    }
+    public Venta(){}
     
     public Venta(Pedido pedido, String banco, int cedula, int numRef, int numTelf){
         this.pedido = pedido;

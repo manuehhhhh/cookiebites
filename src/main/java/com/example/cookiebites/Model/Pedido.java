@@ -2,35 +2,82 @@ package com.example.cookiebites.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.springframework.stereotype.Component;
-import org.yaml.snakeyaml.util.Tuple;
 
 @Component
 public class Pedido {
     public String nombreUsuario;
     public String direccion;
-    //public ArrayList<Tuple<String, Integer>> carrito;
+    public CarritoCompra carrito;
+    public ArrayList<CarritoItem> compra = new ArrayList<>();
     public LocalDate fechaDeEntrega;
-    public boolean confirmado;
-    public int total;
+    public EstadoPedido estado;
+    public double total;
     
     public Pedido(){}
 
-    public Pedido(String nombreUsuario, String direccion, /*ArrayList<Tuple<String, Integer>> carrito,*/ LocalDate fechaDeEntrega){
+    public Pedido(String nombreUsuario, String direccion, LocalDate fechaDeEntrega, EstadoPedido estado){
         this.nombreUsuario = nombreUsuario;
         this.direccion = direccion;
-        //this.carrito = carrito;
         this.fechaDeEntrega = fechaDeEntrega;
-        //this.total = calcularTotal();
+        this.estado = estado;
+        this.compra = carrito.findAll();
+        this.total = carrito.totalPagar();
     }
 
-    // private int calcularTotal(){
-    //     int acum = 0;
-    //     for (Tuple<String,Integer> tuple : carrito) {
-    //         // acum+= tuple._2() * 
-    //     }
-    //     return acum;
-    // }
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
 
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public CarritoCompra getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(CarritoCompra carrito) {
+        this.carrito = carrito;
+    }
+
+    public ArrayList<CarritoItem> getCompra() {
+        return compra;
+    }
+
+    public void setCompra(ArrayList<CarritoItem> compra) {
+        this.compra = compra;
+    }
+
+    public LocalDate getFechaDeEntrega() {
+        return fechaDeEntrega;
+    }
+
+    public void setFechaDeEntrega(LocalDate fechaDeEntrega) {
+        this.fechaDeEntrega = fechaDeEntrega;
+    }
+
+    public EstadoPedido getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }
