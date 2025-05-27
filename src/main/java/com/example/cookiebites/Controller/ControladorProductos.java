@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cookiebites.Model.Producto;
-import com.example.cookiebites.Model.listaProductos;
+import com.example.cookiebites.Repository.listaProductos;
 
 @RestController
 public class ControladorProductos {
@@ -24,7 +24,7 @@ public class ControladorProductos {
         System.out.println("creado el controlador");
     }
 
-   /*  @GetMapping("/productos")
+    @GetMapping("/productos")
     ArrayList<Producto> findAll(){
         System.out.println(this.lista);
         return this.lista.findAll();
@@ -36,7 +36,7 @@ public class ControladorProductos {
     public void agregarProducto(@RequestBody Producto prod){
         System.out.println(prod.toString());
         this.lista.save(prod);
-    }*/
+    }
 
     
 }

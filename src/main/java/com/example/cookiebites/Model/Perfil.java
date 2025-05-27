@@ -8,26 +8,28 @@ import java.util.ArrayList;
 
 @Component
 public class Perfil {
+    public String nombre;
     public String nombreUsuario;
     public String clave;
     public String rol;
     public String correo;
-    public ArrayList<Tuple<String, Integer>> carrito;
+    //public ArrayList<Tuple<String, Integer>> carrito;
 
     public Perfil(){
     }
 
-    public Perfil(String nombreUsuario, String clave, String rol, String correo){
+    public Perfil(String nombre, String nombreUsuario, String clave, String rol, String correo){
+        this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.rol = rol;
         this.correo = correo;
-        this.carrito = new ArrayList<Tuple<String, Integer>>();
+        //this.carrito = new ArrayList<Tuple<String, Integer>>();
     }
 
-    public void agregarAlCarrito(String producto, Integer cant){
-        this.carrito.add(new Tuple<String,Integer>(producto, cant));
-    }
+    // public void agregarAlCarrito(String producto, Integer cant){
+    //     this.carrito.add(new Tuple<String,Integer>(producto, cant));
+    // }
 
     public String getNombreUsuario() {
         return nombreUsuario;

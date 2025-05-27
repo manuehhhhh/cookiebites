@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cookiebites.Model.Pedido;
-import com.example.cookiebites.Model.listaPedidos;
+import com.example.cookiebites.Repository.listaPedidos;
 
 @RestController
 public class controladorPedidos {

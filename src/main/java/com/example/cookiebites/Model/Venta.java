@@ -19,6 +19,10 @@ public class Venta {
         this.numTelf = numTelf;
     }
 
+    public void registrarVenta(){
+        
+    }
+
     public String getBanco() {
         return banco;
     }

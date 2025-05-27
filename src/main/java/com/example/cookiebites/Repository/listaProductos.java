@@ -1,21 +1,27 @@
-package com.example.cookiebites.Model;
+package com.example.cookiebites.Repository;
 
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+
+import com.example.cookiebites.Model.Perfil;
+import com.example.cookiebites.Model.Producto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.io.File;
 
 
 @Repository
 public class listaProductos {
 
+    @Value("${productos.json.path}")
+    private String productosJsonPath;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
 
-    
-    public  listaProductos(){
+    @PostConstruct
+    public  void init(){
         this.listaProductos = leerProductos();
         listaProductos.forEach(galleta -> 
                 System.out.println("Nombre: " + galleta.getNombre() +
@@ -27,29 +33,37 @@ public class listaProductos {
     public ArrayList<Producto> leerProductos() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            ClassPathResource resource = new ClassPathResource("Productos.json");
-            return new ArrayList<>(objectMapper.readValue(
-                resource.getInputStream(),
+            File archivo = new File(productosJsonPath);
+            listaProductos = new ArrayList<>(objectMapper.readValue(
+                archivo,
                 new TypeReference<ArrayList<Producto>>() {}
             ));
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>(); 
+            listaProductos = new ArrayList<>();
+        }
+        return listaProductos;
+    }
+
+    public void actualizarProductos() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            File archivo = new File(productosJsonPath);
+            objectMapper.writeValue(archivo, listaProductos);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-   /*  @PostConstruct
-    public void init(){
-        ArrayList<String> aux = new ArrayList<String>();
-        aux.add("Harina");
-        aux.add("Leche");
-        aux.add("Huevo");
-        aux.add("Mantequilla");
-        aux.add("Azucar");
-    
-        listaProductos.add(new Producto("Galleta de Mantequilla", 20.99 , aux));
-        System.out.println("Lista creada");
-    }*/
+    public Producto consultaProducto(String dato) {
+        Producto productoEncontrado = new Producto();
+        for (Producto pro : listaProductos) {
+            if (pro.nombre.equalsIgnoreCase(dato)) {
+                productoEncontrado = pro;
+            }
+        }
+        return productoEncontrado;
+    }
 
     public ArrayList<Producto> getListaProducto() {
         return listaProductos;
