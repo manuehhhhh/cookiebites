@@ -23,7 +23,7 @@ public class ListaVentas {
         System.out.println("Lista Ventas creada");
     }
 
-    public void agregarVenta() {
+    public void registrarVenta() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             File archivo = new File(ventasJsonPath);
@@ -54,7 +54,7 @@ public class ListaVentas {
 
     public void save(Venta venta){
         this.listaVentas.add(venta);
-        agregarVenta();
+        registrarVenta();
     }
     
 }
