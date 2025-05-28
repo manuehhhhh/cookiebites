@@ -3,7 +3,9 @@ package com.example.cookiebites.Controller;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,10 +25,16 @@ public class ControladorPerfiles {
         System.out.println("creado el controlador");
     }
 
-    @GetMapping("/perfil")
+    @GetMapping("/perfil/todos")
     ArrayList<Perfil> findAll(){
         System.out.println(this.listaUsuarios);
         return this.listaUsuarios.findAll();
+    }
+    @GetMapping("/perfil/{nombre}/clave/{clave}")
+    ResponseEntity<Perfil> findByName(@PathVariable("nombre") String nombre, @PathVariable("clave") String clave){
+        Perfil per = this.listaUsuarios.consultaPerfil(nombre);
+        ResponseEntity<Perfil> retorno = (per.clave != clave)? new ResponseEntity<Perfil>(per, HttpStatus.OK):new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return retorno;
     }
 
     @ResponseStatus(HttpStatus.CREATED)

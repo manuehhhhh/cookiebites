@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +26,8 @@ public class ControladorProductos {
         System.out.println("creado el controlador");
     }
 
-     @GetMapping("productos/buscar")
-    public ResponseEntity<Producto> buscarProducto(@RequestParam String nombre) {
+     @GetMapping("productos/buscar/{nombre}")
+    public ResponseEntity<Producto> buscarProducto(@PathVariable String nombre) {
         Producto producto = listaProductos.consultaProducto(nombre);
         if (producto != null) {
             return ResponseEntity.ok(producto);
