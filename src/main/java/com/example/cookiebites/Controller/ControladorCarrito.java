@@ -11,6 +11,7 @@ import com.example.cookiebites.Model.Producto;
 
 @RestController
 public class ControladorCarrito {
+   
 
     private CarritoCompra carrito;
 
@@ -21,8 +22,5 @@ public class ControladorCarrito {
         CarritoItem nuevoProducto = new CarritoItem(pro, cant);
         carrito.agregarCarrito(nuevoProducto);
         return ResponseEntity.ok(nuevoProducto);   
-    }
-
-    
-    
+    } 
 }

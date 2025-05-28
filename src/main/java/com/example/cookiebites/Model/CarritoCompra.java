@@ -9,13 +9,22 @@ public class CarritoCompra {
     public CarritoCompra(){}
 
     public void agregarCarrito(CarritoItem item) {
+        boolean encontrado = false;
+        for (CarritoItem existente : this.carrito) {
+            if (existente.getProducto().getNombre().equals(item.getProducto().getNombre())) {
+                existente.setCantidad(existente.getCantidad()+item.getCantidad());
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado)
         this.carrito.add(item);
     }
 
     public double totalPagar() {
         double total = 0;
         for (CarritoItem car : this.carrito) {
-            total += car.calcularTotal(car.getProducto(), car.getCantidad());
+            total += car.calcularTotal();
         }
         return total;
     }

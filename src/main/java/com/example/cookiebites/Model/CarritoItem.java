@@ -11,8 +11,8 @@ public class CarritoItem {
         this.cant = cant;
     }
 
-    public double calcularTotal(Producto producto, int cantidad) {
-         return producto.getPrecio()*cantidad;
+    public double calcularTotal() {
+         return producto.getPrecio()*this.cant;
     }
 
     public Producto getProducto() {
@@ -29,8 +29,5 @@ public class CarritoItem {
 
     public void setCantidad(int cant) {
         this.cant = cant;
-        calcularTotal(this.producto, cant);
     }
-
-
 }
