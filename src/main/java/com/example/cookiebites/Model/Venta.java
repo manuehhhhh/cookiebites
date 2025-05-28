@@ -17,6 +17,19 @@ public class Venta {
         this.numTelf = numTelf;
     }
 
+    public String generarFactura() {
+        StringBuilder factura = new StringBuilder();
+        factura.append(pedido.nombreUsuario);
+        for (CarritoItem pro : pedido.getCompra()) {
+            factura.append(pro.getProducto().getNombre());
+            factura.append(pro.getCantidad());
+            factura.append(pro.getCantidad()*pro.getProducto().getPrecio());
+        }
+        factura.append(pedido.getTotal());
+        factura.append(numRef);
+        return factura.toString();
+    }
+
     public String getBanco() {
         return banco;
     }
