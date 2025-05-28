@@ -15,7 +15,7 @@ public class CarritoCompra {
     public double totalPagar() {
         double total = 0;
         for (CarritoItem car : this.carrito) {
-            total += car.getTotal();
+            total += car.calcularTotal(car.getProducto(), car.getCantidad());
         }
         return total;
     }

@@ -3,18 +3,16 @@ package com.example.cookiebites.Model;
 public class CarritoItem {
     private Producto producto;
     private int cant;
-    private double total;
 
     public CarritoItem(){}
 
     public CarritoItem(Producto producto, int cant) {
         this.producto = producto;
         this.cant = cant;
-        this.total = calcularTotal(producto, cant);
     }
 
     public double calcularTotal(Producto producto, int cantidad) {
-         return producto.precio*cantidad;
+         return producto.getPrecio()*cantidad;
     }
 
     public Producto getProducto() {
@@ -31,13 +29,8 @@ public class CarritoItem {
 
     public void setCantidad(int cant) {
         this.cant = cant;
-    }
-    
-    public double getTotal() {
-        return total;
+        calcularTotal(this.producto, cant);
     }
 
-    public void setTotal(double total) {
-        this.total = total;
-    } 
+
 }

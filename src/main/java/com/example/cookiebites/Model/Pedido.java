@@ -2,9 +2,7 @@ package com.example.cookiebites.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import org.springframework.stereotype.Component;
 
-@Component
 public class Pedido {
     public String nombreUsuario;
     public String direccion;
@@ -12,7 +10,6 @@ public class Pedido {
     public ArrayList<CarritoItem> compra = new ArrayList<>();
     public LocalDate fechaDeEntrega;
     public EstadoPedido estado;
-    public double total;
     
     public Pedido(){}
 
@@ -23,7 +20,6 @@ public class Pedido {
         this.estado = estado;
         this.carrito = carrito;
         this.compra = compra;
-        this.total = carrito.totalPagar();
     }
 
     public String getNombreUsuario() {
@@ -75,10 +71,6 @@ public class Pedido {
     }
 
     public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
+        return carrito.totalPagar();
     }
 }
