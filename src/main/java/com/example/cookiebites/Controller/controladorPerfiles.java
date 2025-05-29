@@ -31,9 +31,10 @@ public class ControladorPerfiles {
         return this.listaUsuarios.findAll();
     }
     @GetMapping("/perfil/{nombre}/clave/{clave}")
-    ResponseEntity<Perfil> findByName(@PathVariable("nombre") String nombre, @PathVariable("clave") String clave){
+    ResponseEntity<Perfil> findByName(@PathVariable("nombre") String nombre, @PathVariable("clave") String clavesita){
         Perfil per = this.listaUsuarios.consultaPerfil(nombre);
-        ResponseEntity<Perfil> retorno = (per.clave != clave)? new ResponseEntity<Perfil>(per, HttpStatus.OK):new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        ResponseEntity<Perfil> retorno = (per.clave.equals(clavesita))? (new ResponseEntity<Perfil>(per, HttpStatus.OK)) : (new ResponseEntity<>(HttpStatus.UNAUTHORIZED));
         return retorno;
     }
 
