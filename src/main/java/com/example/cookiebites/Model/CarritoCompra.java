@@ -2,11 +2,15 @@ package com.example.cookiebites.Model;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 public class CarritoCompra {
 
     private ArrayList<CarritoItem> carrito = new ArrayList<>();
-
-    public CarritoCompra(){}
+    public String usuario; 
+    public CarritoCompra(String Usuario){
+        this.usuario = Usuario;
+    }
 
     public void agregarCarrito(CarritoItem item) {
         boolean encontrado = false;
