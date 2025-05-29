@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookieBites</title>
+    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dongle&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo">
+        <div class="icons">
+            <img src="img/edit.png" alt="Crear cuenta" class="perfil-nuevo">
+            <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito">
+        </div>
+    </header>
+
+    <button class="boton-volver" onclick="window.location.href='interfazvisitante.html'">Volver</button>
+
+    <main>
+        <h2>WELCOME TO Carrito</h2>
+        <div id="contenedor-carrito"></div>
+    </main>
+
+    <footer>
+        <p>© CookieBites</p>
+    </footer>
+
+</body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona el perfil de usuario
+    const usuario = document.querySelector('.usuario');
+    if (usuario) {
+      usuario.onclick = function() {
+        window.open('InterfazUsuario.html', '_blank');
+      }
+    }
+
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const contenedor = document.getElementById('contenedor-carrito');
+
+    if (carrito.length === 0) {
+      contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+      return;
+    }
+
+    carrito.forEach(producto => {
+      const item = document.createElement('div');
+      item.classList.add('item-carrito');
+      item.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}" width="60">
+        <span><strong>${producto.nombre}</strong></span>
+        <span class="precio-carrito">$${producto.precioUnitario.toFixed(2)}</span>
+      `;
+      contenedor.appendChild(item);
+    });
+  });
+</script>
+
+</html>

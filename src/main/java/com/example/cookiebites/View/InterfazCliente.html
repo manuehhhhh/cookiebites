@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookieBites</title>
+  <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dongle&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo">
+    <div class="icons">
+      <img src="img/usuario.png" alt="usuario" class="usuario">
+      <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito">
+    </div>
+  </header>
+  <main>
+    <h1>Hoy quiero una...</h1>
+    <div id="catalogo">
+    </div>
+  </main>
+  <footer>
+    <p>© CookieBites</p>
+  </footer>
+</body>
+
+
+
+<script>
+  // Selecciona el carrito
+  const carrito = document.querySelector('.carrito');
+  carrito.onclick = function () {
+    window.open('InterfazCarritoCliente.html', '_blank');
+  }
+
+
+  let listaDePrueba = [
+    {
+      "nombre": "Galleta de Chocolate",
+      "precio": 2.5,
+      "ingredientes": [
+        "Harina",
+        "Azúcar",
+        "Mantequilla",
+        "Cacao",
+        "Chispas de chocolate"
+      ]
+    },
+    {
+      "nombre": "Galleta de Avena",
+      "precio": 2.0,
+      "ingredientes": ["Avena", "Harina", "Azúcar", "Mantequilla", "Canela"]
+    },
+    {
+      "nombre": "Galleta de Vainilla",
+      "precio": 2.2,
+      "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Extracto de vainilla"]
+    },
+    {
+      "nombre": "Galleta de Coco",
+      "precio": 2.8,
+      "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Coco rallado"]
+    },
+    {
+      "nombre": "Galleta de Almendra",
+      "precio": 3.0,
+      "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Almendras picadas"]
+    },
+    {
+      "nombre": "Galleta de Miel",
+      "precio": 2.7,
+      "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Miel"]
+    },
+    {
+      "nombre": "Galleta de Jengibre",
+      "precio": 3.2,
+      "ingredientes": [
+        "Harina",
+        "Azúcar moreno",
+        "Mantequilla",
+        "Jengibre en polvo",
+        "Canela"
+      ]
+    },
+    {
+      "nombre": "Galleta de Nuez",
+      "precio": 3.5,
+      "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Nueces picadas"]
+    },
+    {
+      "nombre": "Galleta de Frambuesa",
+      "precio": 3.8,
+      "ingredientes": [
+        "Harina",
+        "Azúcar",
+        "Mantequilla",
+        "Mermelada de frambuesa"
+      ]
+    },
+    {
+      "nombre": "Galleta de Café",
+      "precio": 3.0,
+      "ingredientes": ["Harina", "Azúcar", "Mantequilla", "Café soluble"]
+    }
+  ]
+
+  
+    
+  function llenarListadoProductos(listado) {
+    let listaCatalogo = document.getElementById("catalogo");
+    let hijoActual;
+    let nombre;
+    let imagen;
+    let precio;
+    console.log("1");
+    for (let producto of listado) {
+      console.log("2");
+      hijoActual = document.createElement("div");
+      hijoActual.classList.add("producto");
+      imagen = document.createElement("img");
+      imagen.setAttribute("scr", "img/galletas/galletaslimon.jpg");
+      imagen.setAttribute("alt", "imagen producto");
+      nombre = document.createElement("h2");
+      console.log(producto);
+      nombre.textContent = producto.nombre;
+      nombre.classList.add("nombre")
+      precio = document.createElement("h3")
+      precio.textContent = "$" + producto.precio;
+      nombre.classList.add("precio");
+      console.log("5");
+      hijoActual.appendChild(imagen);
+      hijoActual.appendChild(nombre);
+      hijoActual.appendChild(precio);
+      console.log("6");
+      console.log(hijoActual);
+      listaCatalogo.appendChild(hijoActual);
+      console.log("7");
+    }
+  }
+
+  // Selecciona el perfil de usuario
+  const usuario = document.querySelector('.usuario');
+  usuario.onclick = function () {
+    window.open('InterfazUsuario.html', '_blank');
+  }
+  llenarListadoProductos(listaDePrueba);
+  console.log("aaaa");
+
+  let productos = document.querySelectorAll('.producto');
+  productos.forEach(function(producto,index) {
+    producto.onclick = function() {
+        let clickedProductData = listaDePrueba[index];
+        sessionStorage.setItem('currentProduct', JSON.stringify(clickedProductData));
+        window.open('InterfazInfoProductoCliente.html', '_blank');
+    };
+});
+</script>
+
+</html>
