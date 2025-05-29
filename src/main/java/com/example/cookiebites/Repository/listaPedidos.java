@@ -2,6 +2,8 @@ package com.example.cookiebites.Repository;
 
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
+
+import com.example.cookiebites.Model.CarritoCompra;
 import com.example.cookiebites.Model.Pedido;
 import jakarta.annotation.PostConstruct;
 
@@ -23,4 +25,14 @@ public class ListaPedidos {
     public void save(Pedido ped){
         this.listaPedidos.add(ped);
     }
+
+    public Pedido findByName(String name){
+        for (Pedido pro : listaPedidos) {
+            if (pro.nombreUsuario.equalsIgnoreCase(name)) {
+                return pro;
+            }
+        }
+        return null;
+    }
+
 }

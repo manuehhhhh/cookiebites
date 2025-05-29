@@ -38,6 +38,12 @@ public class ControladorPerfiles {
         return retorno;
     }
 
+        @GetMapping("/perfil/{nombre}")
+    ResponseEntity<Perfil> findByJustName(@PathVariable("nombre") String nombre){
+        Perfil per = this.listaUsuarios.consultaPerfil(nombre);
+        return new ResponseEntity<Perfil>(per, HttpStatus.OK);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("perfil/crear")
     public void agregarPerfil(@RequestBody Perfil per){

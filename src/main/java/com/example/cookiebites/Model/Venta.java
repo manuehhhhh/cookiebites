@@ -21,13 +21,13 @@ public class Venta {
         StringBuilder factura = new StringBuilder();
         factura.append("Cliente: ").append(pedido.getNombreUsuario()).append("\n");
         factura.append("Productos:\n");
-        for (CarritoItem pro : pedido.getCompra()) {
-            factura.append("- ")
-            .append(pro.getProducto().getNombre())
-            .append(" x").append(pro.getCantidad())
-            .append(" = ").append(pro.getCantidad() * pro.getProducto().getPrecio())
-            .append("\n");
-        }
+        // for (CarritoItem pro : pedido.getCompra()) {
+        //     factura.append("- ")
+        //     .append(pro.getProducto().getNombre())
+        //     .append(" x").append(pro.getCantidad())
+        //     .append(" = ").append(pro.getCantidad() * pro.getProducto().getPrecio())
+        //     .append("\n");
+        // }
         factura.append("Total: ").append(pedido.getTotal()).append("\n");
         factura.append("Referencia de pago: ").append(numRef);
         return factura.toString();
