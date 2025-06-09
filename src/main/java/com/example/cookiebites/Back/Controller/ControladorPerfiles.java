@@ -1,4 +1,4 @@
-package com.example.cookiebites.Controller;
+package com.example.cookiebites.Back.Controller;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.cookiebites.Model.Perfil;
-import com.example.cookiebites.Repository.ListaUsuarios;
+import com.example.cookiebites.Back.Model.Perfil;
+import com.example.cookiebites.Back.Repository.ListaUsuarios;
 
 @RestController
 public class ControladorPerfiles {

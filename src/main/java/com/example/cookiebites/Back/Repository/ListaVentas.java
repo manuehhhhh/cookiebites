@@ -1,8 +1,8 @@
-package com.example.cookiebites.Repository;
+package com.example.cookiebites.Back.Repository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import com.example.cookiebites.Model.Venta;
+import com.example.cookiebites.Back.Model.Venta;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;

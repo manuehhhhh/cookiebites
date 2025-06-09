@@ -1,7 +1,7 @@
-package com.example.cookiebites.Model;
+package com.example.cookiebites.Back.Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 
 //pedido
 public class Pedido {

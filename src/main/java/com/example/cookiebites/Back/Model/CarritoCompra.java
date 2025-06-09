@@ -1,8 +1,7 @@
-package com.example.cookiebites.Model;
+package com.example.cookiebites.Back.Model;
 
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Repository;
 
 public class CarritoCompra {
 

@@ -1,4 +1,4 @@
-package com.example.cookiebites.Model;
+package com.example.cookiebites.Back.Model;
 
 public class CarritoItem {
     private Producto producto;

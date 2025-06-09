@@ -1,11 +1,11 @@
-package com.example.cookiebites.Repository;
+package com.example.cookiebites.Back.Repository;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import com.example.cookiebites.Model.Perfil;
+import com.example.cookiebites.Back.Model.Perfil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,9 +20,7 @@ public class ListaUsuarios {
     
     @PostConstruct
     private void init(){
-        System.err.println("Lista Perfil creada");
-        Perfil p = new Perfil("Manuel","Manuel12", "aceituna123", "cliente", "correoReal@gmail.com");
-        save(p);
+        this.listaPerfiles = leerPerfiles();
     }
 
     public void agregarUsuario() {

@@ -1,13 +1,11 @@
-package com.example.cookiebites.Repository;
+package com.example.cookiebites.Back.Repository;
 
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.cookiebites.Model.CarritoCompra;
-import com.example.cookiebites.Model.CarritoItem;
-import com.example.cookiebites.Model.Pedido;
-import com.example.cookiebites.Model.Producto;
+import com.example.cookiebites.Back.Model.CarritoCompra;
+
 
 import jakarta.annotation.PostConstruct;
 

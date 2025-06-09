@@ -1,38 +1,16 @@
 [
   {
-    "pedido": {
-      "usuario": "CarlosGomez",
-      "direccion": "Calle 5, Caracas, Venezuela",
-      "fechaEntrega": "2025-06-02",
-      "estado": "en proceso"
-    },
-    "banco": "Banco Central",
-    "cedula": "98765432",
-    "telefono": "+58 4145678901",
-    "referencia": "XYZ987654"
+    "pedido": null,
+    "banco": "Banco Provincial (BBVA Provincial)",
+    "cedula": 30346546,
+    "numRef": 0,
+    "numTelf": 0
   },
   {
-    "pedido": {
-      "usuario": "MariaLopez",
-      "direccion": "Av. Bolívar #456, Caracas, Venezuela",
-      "fechaEntrega": "2025-06-03",
-      "estado": "lista"
-    },
-    "banco": "Banco Provincial",
-    "cedula": "45678912",
-    "telefono": "+58 4123456789",
-    "referencia": "LMN456789"
-  },
-  {
-    "pedido": {
-      "usuario": "JoseMartinez",
-      "direccion": "Urbanización San Ignacio, Caracas, Venezuela",
-      "fechaEntrega": "2025-06-04",
-      "estado": "orden recibida"
-    },
-    "banco": "Banco Mercantil",
-    "cedula": "32165487",
-    "telefono": "+58 4167890123",
-    "referencia": "JKL321654"
+    "pedido": null,
+    "banco": "Venezolano de Crédito",
+    "cedula": 10116009,
+    "numRef": 0,
+    "numTelf": 0
   }
 ]

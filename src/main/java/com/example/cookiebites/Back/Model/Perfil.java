@@ -1,4 +1,4 @@
-package com.example.cookiebites.Model;
+package com.example.cookiebites.Back.Model;
 
 import org.springframework.stereotype.Component;
 import java.lang.String;

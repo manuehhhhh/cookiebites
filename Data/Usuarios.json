@@ -1,1 +1,16 @@
-[{"nombre":"Manuel","nombreUsuario":"Manuel12","clave":"aceituna123","rol":"cliente","correo":"correoReal@gmail.com"}]
+[
+  {
+    "nombre": "Manuel",
+    "nombreUsuario": "Manuel12",
+    "clave": "aceituna123",
+    "rol": "cliente",
+    "correo": "correoReal@gmail.com"
+  },
+  {
+    "nombre": "Laura",
+    "nombreUsuario": "lausmp",
+    "clave": "14785236",
+    "rol": "cliente",
+    "correo": "laura@gmail.com"
+  }
+]
