@@ -2,6 +2,8 @@ package com.example.cookiebites.Back.Model;
 
 import java.time.LocalDate;
 
+import com.example.cookiebites.Back.Repository.ListaProductos;
+
 
 //pedido
 public class Pedido {
@@ -62,7 +64,7 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public double getTotal() {
-        return carrito.totalPagar();
+    public double getTotal(ListaProductos productos) {
+        return carrito.totalPagar(productos);
     }
 }

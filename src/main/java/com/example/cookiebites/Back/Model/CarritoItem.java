@@ -1,33 +1,33 @@
 package com.example.cookiebites.Back.Model;
 
 public class CarritoItem {
-    private Producto producto;
-    private int cant;
+    private String nombreProducto;
+    private int cantidad;
 
     public CarritoItem(){}
 
-    public CarritoItem(Producto producto, int cant) {
-        this.producto = producto;
-        this.cant = cant;
+    public CarritoItem(String nombreProducto, int cant) {
+        this.nombreProducto = nombreProducto;
+        this.cantidad = cantidad;
     }
 
-    public double calcularTotal() {
-         return producto.getPrecio()*this.cant;
+    // public double calcularTotal() {
+    //      return this.nombreProducto.getPrecio()*this.cant;
+    // }
+
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public int getCantidad() {
-        return cant;
+        return cantidad;
     }
 
-    public void setCantidad(int cant) {
-        this.cant = cant;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

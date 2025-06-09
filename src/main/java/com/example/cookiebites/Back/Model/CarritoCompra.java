@@ -2,11 +2,13 @@ package com.example.cookiebites.Back.Model;
 
 import java.util.ArrayList;
 
-//hjgfui
+import com.example.cookiebites.Back.Repository.ListaProductos;
+
 public class CarritoCompra {
 
     private ArrayList<CarritoItem> carrito = new ArrayList<>();
     public String usuario; 
+
     public CarritoCompra(String Usuario){
         this.usuario = Usuario;
     }
@@ -14,7 +16,7 @@ public class CarritoCompra {
     public void agregarCarrito(CarritoItem item) {
         boolean encontrado = false;
         for (CarritoItem existente : this.carrito) {
-            if (existente.getProducto().getNombre().equals(item.getProducto().getNombre())) {
+            if (existente.getNombreProducto().equals(item.getNombreProducto())) {
                 existente.setCantidad(existente.getCantidad()+item.getCantidad());
                 encontrado = true;
                 break;
@@ -24,10 +26,13 @@ public class CarritoCompra {
         this.carrito.add(item);
     }
 
-    public double totalPagar() {
+    public double totalPagar(ListaProductos productos) {
         double total = 0;
         for (CarritoItem car : this.carrito) {
-            total += car.calcularTotal();
+            Producto prod = productos.consultaProducto(car.getNombreProducto());
+            if (prod != null) {
+                total += prod.getPrecio() * car.getCantidad();
+            }
         }
         return total;
     }

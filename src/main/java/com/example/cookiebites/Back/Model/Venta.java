@@ -1,5 +1,7 @@
 package com.example.cookiebites.Back.Model;
 
+import com.example.cookiebites.Back.Repository.ListaProductos;
+
 public class Venta {
     public Pedido pedido;
     public String banco;
@@ -17,7 +19,7 @@ public class Venta {
         this.numTelf = numTelf;
     }
 
-    public String generarFactura() {
+    public String generarFactura(ListaProductos listaProductos) {
         StringBuilder factura = new StringBuilder();
         factura.append("Cliente: ").append(pedido.getNombreUsuario()).append("\n");
         factura.append("Productos:\n");
@@ -28,7 +30,7 @@ public class Venta {
         //     .append(" = ").append(pro.getCantidad() * pro.getProducto().getPrecio())
         //     .append("\n");
         // }
-        factura.append("Total: ").append(pedido.getTotal()).append("\n");
+        factura.append("Total: ").append(pedido.getTotal(listaProductos)).append("\n");
         factura.append("Referencia de pago: ").append(numRef);
         return factura.toString();
     }
