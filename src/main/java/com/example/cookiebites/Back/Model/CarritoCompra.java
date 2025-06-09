@@ -2,7 +2,7 @@ package com.example.cookiebites.Back.Model;
 
 import java.util.ArrayList;
 
-
+//hjgfui
 public class CarritoCompra {
 
     private ArrayList<CarritoItem> carrito = new ArrayList<>();
