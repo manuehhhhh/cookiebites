@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookieBites</title>
+    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dongle&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo">
+        <div class="icons">
+            <img src="img/usuario.png" alt="usuario" class="usuario">
+            <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito">
+        </div>
+    </header>
+
+    <button id="boton-volver" >Volver</button>
+
+    <main>
+        <h2>PERFIL</h2>
+        <div class="perfil">
+            <img src="img/usuario.png" alt="usuario" class="usuario-perfil">
+            <p><strong>Nombre:</strong> <span class="datos-perfil" id="nombre"></span></p>
+            <p><strong>Nombre de usuario:</strong> <span class="datos-perfil" id="nombreusuario"></span></p>
+            <p><strong>Correo</strong> <span class="datos-perfil" id="emailuser"></span></p>
+            <p><strong>Contraseña:</strong> <span class="ver-contrasena" id="passworduser"></span></p>
+        </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© CookieBites</p>
+    </footer>
+</body>
+
+<script>
+    // const user = JSON.parse(sessionStorage.getItem('currentuser'));
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let tipoDeUsuario = urlParams.get('perfil');
+    let nombreUsuario = urlParams.get('id');
+    localStorage.clear();
+    localStorage.removeItem('currentuser');
+
+    let botonVolver = document.getElementById("boton-volver");
+        botonVolver.addEventListener(('click'), ()=>{
+            window.location.href = "ConsultarCatalogo.html?perfil=" + tipoDeUsuario +  "&id=" + nombreUsuario ;
+        })
+
+    // if (user) {
+    //     document.getElementById('nombre').textContent = user.nombre;
+    //     document.getElementById('nombreusuario').textContent = user.usuario;
+    //     document.getElementById('emailuser').textContent = user.correo;
+    //     document.getElementById('passworduser').textContent = user.contrasena;
+    // }
+
+    // Mostrar contraseña al pasar el mouse
+    
+
+    async function buscarUsuario(nombre, clave){
+        console.log("Busando...");
+        let aux;
+        fetch('http://localhost:8080/perfil/'+ nombreUsuario).then((response) => {
+
+                response.json().then((json) => {
+                     document.getElementById('nombre').textContent = json.nombre;
+                    document.getElementById('nombreusuario').textContent = json.nombreUsuario;
+                    document.getElementById('emailuser').textContent = json.correo;
+                    document.getElementById('passworduser').textContent = json.contrasena;
+
+                    const passwordSpan = document.getElementById('passworduser');
+                    const realPassword = json.contrasena;
+                    passwordSpan.textContent = '******';
+
+                    passwordSpan.addEventListener('mouseenter', function () {
+                        passwordSpan.textContent = realPassword;
+                    });
+                    passwordSpan.addEventListener('mouseleave', function () {
+                        passwordSpan.textContent = '******';
+                    });
+                })
+            }
+
+        )}
+        buscarUsuario();
+
+</script>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookieBites</title>
+    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dongle&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo">
+        <div class="icons">
+            <img src="img/usuario.png" alt="Crear cuenta" class="usuario">
+            <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito">
+        </div>
+    </header>
+    <main>
+        <button id="boton-volver" >Volver</button>
+        <div class="contenedor-resumen">
+            <h2>Resumen de la compra</h2>
+            <div class="resumen-compra" id="nombreusuario">
+                <p><strong>Nombre:</strong></p>
+            </div>
+            <div class="resumen-compra" id="direcusuario">
+                <p><strong>Direccion:</strong></p>
+            </div>
+            <div class="resumen-compra" id="carritoalmacenado">
+                <p><strong>Carrito:</strong></p>
+            </div>
+            <ul class="elementos">
+                <li class="elemento" id="elemento1">
+                    Producto 1:
+                </li>
+                <li class="elemento" id="elemento2">
+                    <p><strong>Producto 2:</strong></p>
+                </li>
+                <li class="elemento" id="elemento3">
+                    <p><strong>Producto 3:</strong></p>
+                </li>
+                <li class="elemento" id="elemento4">
+                    <p><strong>Producto 4:</strong></p>
+                </li>
+            </ul>
+            <div class="resumen-compra" id="totaldelcarro">
+                <p><strong>Total de Compra:</strong></p>
+            </div>
+            <div class="resumen-compra" id="fechapedido">
+                <p><strong>Fecha de Entrega:</strong></p>
+            </div>
+            <div class="resumen-compra">
+                <p><strong>Estado: </strong>PENDIENTE</p>
+            </div>
+            <button class="button button1" onclick="window.location.href='RegistrarVenta.html'">Confirmar</button>
+        </div>
+    </main>
+    <footer>
+        <p>© CookieBites</p>
+    </footer>
+</body>
+
+</html>
