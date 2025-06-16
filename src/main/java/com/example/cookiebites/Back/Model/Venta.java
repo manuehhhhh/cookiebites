@@ -8,7 +8,7 @@ public class Venta {
     public int cedula;
     public int numRef;
     public int numTelf;
-
+//venta
     public Venta(){}
     
     public Venta(Pedido pedido, String banco, int cedula, int numRef, int numTelf){
