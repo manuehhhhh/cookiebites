@@ -1,16 +1,1 @@
-[
-  {
-    "pedido": null,
-    "banco": "Banco Provincial (BBVA Provincial)",
-    "cedula": 30346546,
-    "numRef": 0,
-    "numTelf": 0
-  },
-  {
-    "pedido": null,
-    "banco": "Venezolano de Crédito",
-    "cedula": 10116009,
-    "numRef": 0,
-    "numTelf": 0
-  }
-]
+[{"banco":"Banco Provincial (BBVA Provincial)","cedula":55555555,"numRef":66666666,"numTelf":11111111111},{"banco":"Banco Mercantil","cedula":10116009,"numRef":87456321,"numTelf":4143073015},{"banco":"Bancamiga","cedula":10445338,"numRef":12365498,"numTelf":4142668945},{"banco":"Banco Exterior","cedula":30346546,"numRef":12345678,"numTelf":4143073015}]

@@ -123,7 +123,7 @@
           .then((json) => generarCarrito(json));
       }
 
-      function generarCarrito(lista) {
+      async function generarCarrito(lista) {
         carrito = lista;
         let recipiente = document.getElementById("lista-productos");
         recipiente.innerHTML = "";
@@ -133,25 +133,53 @@
           contenedor.classList.add("item-carrito");
           let imagen = document.createElement("img");
           imagen.src = "img/galletas/galletachoco.jpg";
-          imagen.alt = "Galleta de Chocolate";
+          imagen.alt = elemento.nombreProducto;
           contenedor.appendChild(imagen);
+
+          // Buscar el producto real para obtener nombre y precio
+          let nombreMostrado = elemento.nombreProducto;
+          let precioUnitario = 0;
+          try {
+            const resp = await fetch(
+              "http://localhost:8080/productos/buscar/" +
+                encodeURIComponent(elemento.nombreProducto)
+            );
+            if (resp.ok) {
+              const prodData = await resp.json();
+              nombreMostrado = prodData.nombre || elemento.nombreProducto;
+              precioUnitario = prodData.precio;
+            } else {
+              nombreMostrado = elemento.nombreProducto + " (no encontrado)";
+            }
+          } catch (e) {
+            nombreMostrado = elemento.nombreProducto + " (error)";
+          }
+
           let nombre = document.createElement("span");
-          nombre.textContent = elemento.producto.nombre;
+          nombre.textContent = nombreMostrado;
           contenedor.appendChild(nombre);
+
           let precio = document.createElement("span");
           precio.textContent =
             elemento.cantidad +
             "x" +
-            elemento.producto.precio +
+            precioUnitario +
             "= $" +
-            elemento.cantidad * elemento.producto.precio;
+            (elemento.cantidad * precioUnitario).toFixed(2);
           contenedor.appendChild(precio);
+
           recipiente.appendChild(contenedor);
-          acum += elemento.cantidad * elemento.producto.precio;
+          acum += elemento.cantidad * precioUnitario;
         }
         totalPedido = acum;
         document.getElementById("total-pedido").textContent =
           "$" + acum.toFixed(2);
+      }
+
+      async function buscarCarrito() {
+        fetch("http://localhost:8080/carrito/leer/" + nombreUsuario)
+          .then((response) => response.json())
+          .then((json) => generarCarrito(json));
       }
 
       async function crearPedido(Pedido) {

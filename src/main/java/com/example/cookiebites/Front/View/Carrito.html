@@ -1,146 +1,185 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CookieBites</title>
-    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dongle&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
-</head>
+    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Dongle&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <header>
-        <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo">
-        <div class="icons">
-            <img src="img/usuario.png" alt="Usuario" class="usuario">
-            <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito">
-        </div>
+      <img
+        id="logo"
+        src="img/CookieBitesSinFondo.png"
+        alt="Logo CookieBites"
+        class="logo"
+      />
+      <div class="icons">
+        <img src="img/usuario.png" alt="Usuario" class="usuario" />
+        <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
+      </div>
     </header>
 
     <main>
-        <button id="boton-volver">Volver</button>
-        <h2>Carrito</h2>
-        <div id="contenedor-carrito"></div>
-        <div style="text-align: right; margin-top: 24px;">
-            <button id="boton-crearpedido">Crear Pedido</button>
-        </div>
+      <button id="boton-volver">Volver</button>
+      <h2>Carrito</h2>
+      <div id="contenedor-carrito"></div>
+      <div style="text-align: right; margin-top: 24px">
+        <button id="boton-crearpedido">Crear Pedido</button>
+      </div>
     </main>
 
     <footer>
-        <p>© CookieBites</p>
+      <p>© CookieBites</p>
     </footer>
+  </body>
 
-</body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Obtiene los parámetros de la URL
+      let urlParams = new URLSearchParams(window.location.search);
+      let tipoDeUsuario = urlParams.get("perfil");
+      let nombreUsuario = urlParams.get("id");
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona el perfil de usuario
-    const usuario = document.querySelector('.usuario');
-    if (usuario) {
-      usuario.onclick = function() {
-        let url = ((tipoDeUsuario == "admin") || (tipoDeUsuario == "cliente")) ? "ConsultarPerfil.html?perfil=" + tipoDeUsuario +  "&id=" + nombreUsuario : "LogIn.html";
-        window.location.href = url;
-      }
-    }
+      // Botón volver
+      document.getElementById("boton-volver").addEventListener("click", () => {
+        window.location.href =
+          "ConsultarCatalogo.html?perfil=" +
+          tipoDeUsuario +
+          "&id=" +
+          nombreUsuario;
+      });
 
-    let urlParams = new URLSearchParams(window.location.search);
-    let tipoDeUsuario = urlParams.get('perfil');
-    let nombreUsuario = urlParams.get('id');
-    document.getElementById("boton-volver").addEventListener(('click'), ()=>{
-      window.location.href = "ConsultarCatalogo.html?perfil=" + tipoDeUsuario +  "&id=" + nombreUsuario;
-    })
-    // let carrito = [{
-    //   Producto:{
-    //   "nombre": "Galleta con chispas",
-    //   "precio": 2.0,
-    //   "ingredientes": ["chispas", "Harina", "Azúcar", "Mantequilla"]
-    //   },
-    //   cant: 99,
-    //   total: 198
-    //   },
-    //   {
-    //   Producto:{
-    //   "nombre": "Galleta de Chocolarte",
-    //   "precio": 1.0,
-    //   "ingredientes": ["Cacao", "Harina", "Azúcar", "Mantequilla"]
-    //   },
-    //   cant: 99,
-    //   total: 99
-    //   }];
-    
-    const contenedor = document.getElementById('contenedor-carrito');
+      const contenedor = document.getElementById("contenedor-carrito");
 
-    function generarCarrito(carrito){
-      console.log("aaaaaaaaaaaa");
-      console.log(carrito);
-      if (carrito.length === 0) {
-      contenedor.innerHTML = "<p>El carrito está vacío.</p>";
-    }
-    if ((tipoDeUsuario !== "cliente") || (nombreUsuario == "")){
-      let Advertencia = document.createElement("div");
-      Advertencia.textContent = "No esta loggeado como cliente, trate iniciar sesion como usuario";
-      contenedor.appendChild(Advertencia);
-    } else {
-      carrito.forEach(producto => {
-      console.log("evento");
-      const item = document.createElement('div');
-      item.classList.add('item-carrito');
-      item.innerHTML = `
-        <img src="" alt="${producto.producto.nombre}" width="60">
-        <span><strong>${producto.producto.precio}</strong></span>
-        <span class="precio-carrito">${producto.cantidad} unid</span>
-        <span class="precio-carrito">$${producto.cantidad*producto.producto.precio}</span>
-      `;
-      contenedor.appendChild(item);
-    });
-    }
-    }
-
-    
-    async function buscarCarrito(){
-            console.log("Busando...");
-            let aux;
-            // console.log('http://localhost:8080/productos/' + decodeURIComponent(nombreProducto));
-            fetch('http://localhost:8080/carrito/leer/' + nombreUsuario).then((response) => response.json()).then((json) => generarCarrito(json));
-
-            //return JSON.parse(pediod);
+      async function generarCarrito(carrito) {
+        console.log("Carrito recibido:", carrito);
+        carrito.forEach((prod, idx) => {
+          console.log(`Producto[${idx}]:`, prod);
+        });
+        contenedor.innerHTML = "";
+        if (!carrito || carrito.length === 0) {
+          contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+          return;
         }
-    buscarCarrito();
-
-    document.querySelector('#boton-crearpedido').addEventListener('click', function(e) {
-    e.preventDefault();
-    console.log(tipoDeUsuario);
-    //if (tipoDeUsuario == "visitante"){
-      //alert('Por favor, inicia sesión para crear un pedido.');
-      //window.location.href = 'LogIn.html';
-      //return;
-    //}
-    //else{
-      if (document.querySelectorAll('.item-carrito').length === 0) {
-        alert('El carrito está vacío. Por favor, agrega productos antes de crear un pedido.');
-        return;
+        if (
+          !nombreUsuario ||
+          typeof tipoDeUsuario !== "string" ||
+          tipoDeUsuario.toLowerCase() !== "cliente"
+        ) {
+          let advertencia = document.createElement("div");
+          advertencia.textContent =
+            "No está loggeado como cliente, trate iniciar sesión como usuario";
+          contenedor.appendChild(advertencia);
+          return;
+        }
+        for (const producto of carrito) {
+          let nombre = producto.nombreProducto || producto.nombre;
+          if (!nombre) {
+            console.warn("Producto sin nombre válido:", producto);
+            const item = document.createElement("div");
+            item.classList.add("item-carrito");
+            item.innerHTML = `
+        <span style="color:red;"><strong>Producto sin nombre</strong></span>
+        <span class="precio-carrito">${producto.cantidad ?? "?"} unid</span>
+        <span class="precio-carrito">$0.00</span>
+      `;
+            contenedor.appendChild(item);
+            continue;
+          }
+          let precio = 0;
+          let nombreMostrado = nombre;
+          try {
+            const resp = await fetch(
+              "http://localhost:8080/productos/buscar/" +
+                encodeURIComponent(nombre)
+            );
+            if (resp.ok) {
+              const prodData = await resp.json();
+              precio = prodData.precio ?? 0;
+              nombreMostrado = prodData.nombre || nombre;
+            } else {
+              nombreMostrado = nombre + " (no encontrado en catálogo)";
+            }
+          } catch (e) {
+            console.error("Error buscando producto:", nombre, e);
+            nombreMostrado = nombre + " (error de conexión)";
+          }
+          const item = document.createElement("div");
+          item.classList.add("item-carrito");
+          item.innerHTML = `
+      <img src="" alt="${nombreMostrado}" width="60">
+      <span><strong>${nombreMostrado}</strong></span>
+      <span class="precio-carrito">${producto.cantidad} unid</span>
+      <span class="precio-carrito">$${(producto.cantidad * precio).toFixed(
+        2
+      )}</span>
+    `;
+          contenedor.appendChild(item);
+        }
       }
-      window.location.href = 'CrearPedido.html?perfil='+ tipoDeUsuario +  "&id=" + nombreUsuario;
 
-      const pedido = {
-        carrito: []
-      };
+      async function buscarCarrito() {
+        if (!nombreUsuario) {
+          contenedor.innerHTML = "<p>Error: usuario no identificado.</p>";
+          return;
+        }
+        console.log("Buscando carrito para:", nombreUsuario);
+        fetch("http://localhost:8080/carrito/leer/" + nombreUsuario)
+          .then((response) => response.json())
+          .then((json) => generarCarrito(json))
+          .catch((err) => {
+            contenedor.innerHTML = "<p>Error al cargar el carrito.</p>";
+            console.error(err);
+          });
+      }
 
-      
-      console.log('Pedido creado:', pedido);
+      buscarCarrito();
 
-      window.location.href = 'CrearPedido.html?perfil='+ tipoDeUsuario +  "&id=" + nombreUsuario;
+      document
+        .querySelector("#boton-crearpedido")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          if (document.querySelectorAll(".item-carrito").length === 0) {
+            alert(
+              "El carrito está vacío. Por favor, agrega productos antes de crear un pedido."
+            );
+            return;
+          }
+          window.location.href =
+            "CrearPedido.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+        });
 
-    //}
-  });
-
-  });
-  
-  
-</script>
-
+      // Icono usuario
+      const usuario = document.querySelector(".usuario");
+      if (usuario) {
+        usuario.onclick = function () {
+          let url =
+            tipoDeUsuario &&
+            (tipoDeUsuario.toLowerCase() === "admin" ||
+              tipoDeUsuario.toLowerCase() === "cliente")
+              ? "ConsultarPerfil.html?perfil=" +
+                tipoDeUsuario +
+                "&id=" +
+                nombreUsuario
+              : "LogIn.html";
+          window.location.href = url;
+        };
+      }
+    });
+  </script>
 </html>

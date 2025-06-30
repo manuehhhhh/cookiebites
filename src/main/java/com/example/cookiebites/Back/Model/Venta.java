@@ -3,23 +3,21 @@ package com.example.cookiebites.Back.Model;
 import com.example.cookiebites.Back.Repository.ListaProductos;
 
 public class Venta {
-    public Pedido pedido;
     public String banco;
-    public int cedula;
-    public int numRef;
-    public int numTelf;
+    public long cedula;
+    public long numRef;
+    public long numTelf;
 //venta
     public Venta(){}
     
-    public Venta(Pedido pedido, String banco, int cedula, int numRef, int numTelf){
-        this.pedido = pedido;
+    public Venta(String banco, long cedula, long numRef, long numTelf){
         this.banco = banco;
         this.cedula = cedula;
         this.numRef = numRef;
         this.numTelf = numTelf;
     }
 
-    public String generarFactura(ListaProductos listaProductos) {
+    /*public String generarFactura(ListaProductos listaProductos) {
         StringBuilder factura = new StringBuilder();
         factura.append("Cliente: ").append(pedido.getNombreUsuario()).append("\n");
         factura.append("Productos:\n");
@@ -33,7 +31,7 @@ public class Venta {
         factura.append("Total: ").append(pedido.getTotal(listaProductos)).append("\n");
         factura.append("Referencia de pago: ").append(numRef);
         return factura.toString();
-    }
+    }*/
 
     public String getBanco() {
         return banco;
@@ -43,36 +41,36 @@ public class Venta {
         this.banco = banco;
     }
 
-    public int getCedula() {
+    public long getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(long cedula) {
         this.cedula = cedula;
     }
 
-    public int getNumRef() {
+    public long getNumRef() {
         return numRef;
     }
 
-    public void setNumRef(int numRef) {
+    public void setNumRef(long numRef) {
         this.numRef = numRef;
     }
 
-    public int getNumTelf() {
+    public long getNumTelf() {
         return numTelf;
     }
 
-    public void setNumTelf(int numTelf) {
+    public void setNumTelf(long numTelf) {
         this.numTelf = numTelf;
     }
 
-    public Pedido getPedido() {
+    /*public Pedido getPedido() {
         return pedido;
     }
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
-    }
+    }*/
 }
 

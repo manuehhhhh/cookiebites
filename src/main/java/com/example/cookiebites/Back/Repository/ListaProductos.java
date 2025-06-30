@@ -50,9 +50,9 @@ public class ListaProductos {
     }
 
     public Producto consultaProducto(String nombre) {
-        for (Producto pro : listaProductos) {
-            if (pro.getNombre().equalsIgnoreCase(nombre)) {
-                return pro;
+        for (Producto p : listaProductos) {
+            if (p.getNombre().trim().equalsIgnoreCase(nombre.trim())) {
+                return p;
             }
         }
         return null;
