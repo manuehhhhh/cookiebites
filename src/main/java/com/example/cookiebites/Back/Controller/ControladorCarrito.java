@@ -1,7 +1,6 @@
 package com.example.cookiebites.Back.Controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.example.cookiebites.Back.Model.CarritoCompra;
 import com.example.cookiebites.Back.Model.CarritoItem;
-import com.example.cookiebites.Back.Model.Producto;
 import com.example.cookiebites.Back.Repository.ListaCarritos;
 
 @RestController

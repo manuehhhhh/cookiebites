@@ -8,14 +8,16 @@ import java.lang.String;
 public class Producto {
     public String nombre;
     public double precio;
+    public String imagen;
     public ArrayList<String> ingredientes = new ArrayList<>();
 
 
     public Producto(){}
 
-    public Producto(String nombre, double precio, ArrayList<String> ingredientes){
+    public Producto(String nombre, double precio, String imagen, ArrayList<String> ingredientes){
         this.nombre = nombre;
         this.precio = precio;
+        this.imagen = imagen;
         this.ingredientes = ingredientes;
     }
 
@@ -33,6 +35,14 @@ public class Producto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public ArrayList<String> getIngredientes() {

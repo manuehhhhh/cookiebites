@@ -1,6 +1,5 @@
 package com.example.cookiebites.Back.Model;
 
-import com.example.cookiebites.Back.Repository.ListaProductos;
 
 public class Venta {
     public String banco;
