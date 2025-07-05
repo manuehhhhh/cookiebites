@@ -21,17 +21,29 @@
         </div>
     </header>
 
-    <button id="boton-volver" >Volver</button>
+    <button id="boton-volver">Volver</button>
 
     <main>
         <h2>PERFIL</h2>
         <div class="perfil">
             <img src="img/usuario.png" alt="usuario" class="usuario-perfil">
             <p><strong>Nombre:</strong> <span class="datos-perfil" id="nombre"></span></p>
-            <p><strong>Nombre de usuario:</strong> <span class="datos-perfil" id="nombreusuario"></span></p>
-            <p><strong>Correo</strong> <span class="datos-perfil" id="emailuser"></span></p>
-            <p><strong>Contraseña:</strong> <span class="ver-contrasena" id="passworduser"></span></p>
-        </div>
+            <p>
+                <strong>Nombre de usuario:</strong>
+                <span class="datos-perfil" id="nombreusuario"></span>
+                <input type="text" id="edit-nombreusuario" class="edit-input" style="display:none;">
+            </p>
+            <p>
+                <strong>Correo:</strong>
+                <span class="datos-perfil" id="emailuser"></span>
+            </p>
+            <p>
+                <strong>Contraseña:</strong>
+                <span class="ver-contrasena" id="passworduser"></span>
+                <input type="text" id="edit-passworduser" class="edit-input" style="display:none;">
+            </p>
+            <button id="editar-btn" class="edit-btn">Editar</button>
+            <button id="guardar-btn" class="save-btn" style="display:none;">Guardar</button>
         </div>
     </main>
 
@@ -41,8 +53,6 @@
 </body>
 
 <script>
-    // const user = JSON.parse(sessionStorage.getItem('currentuser'));
-
     let urlParams = new URLSearchParams(window.location.search);
     let tipoDeUsuario = urlParams.get('perfil');
     let nombreUsuario = urlParams.get('id');
@@ -50,47 +60,73 @@
     localStorage.removeItem('currentuser');
 
     let botonVolver = document.getElementById("boton-volver");
-        botonVolver.addEventListener(('click'), ()=>{
-            window.location.href = "ConsultarCatalogo.html?perfil=" + tipoDeUsuario +  "&id=" + nombreUsuario ;
-        })
+    botonVolver.addEventListener('click', () => {
+        window.location.href = "ConsultarCatalogo.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+    });
 
-    // if (user) {
-    //     document.getElementById('nombre').textContent = user.nombre;
-    //     document.getElementById('nombreusuario').textContent = user.usuario;
-    //     document.getElementById('emailuser').textContent = user.correo;
-    //     document.getElementById('passworduser').textContent = user.contrasena;
-    // }
+    async function buscarUsuario() {
+        fetch('http://localhost:8080/perfil/' + nombreUsuario)
+            .then((response) => response.json())
+            .then((json) => {
+                document.getElementById('nombre').textContent = json.nombre;
+                document.getElementById('nombreusuario').textContent = json.nombreUsuario;
+                document.getElementById('emailuser').textContent = json.correo;
+                document.getElementById('passworduser').textContent = '******';
 
-    // Mostrar contraseña al pasar el mouse
-    
+                // Guardar la contraseña real para mostrarla temporalmente
+                const passwordSpan = document.getElementById('passworduser');
+                const realPassword = json.contrasena;
 
-    async function buscarUsuario(nombre, clave){
-        console.log("Busando...");
-        let aux;
-        fetch('http://localhost:8080/perfil/'+ nombreUsuario).then((response) => {
-
-                response.json().then((json) => {
-                     document.getElementById('nombre').textContent = json.nombre;
-                    document.getElementById('nombreusuario').textContent = json.nombreUsuario;
-                    document.getElementById('emailuser').textContent = json.correo;
-                    document.getElementById('passworduser').textContent = json.contrasena;
-
-                    const passwordSpan = document.getElementById('passworduser');
-                    const realPassword = json.contrasena;
+                passwordSpan.addEventListener('mouseenter', function () {
+                    passwordSpan.textContent = realPassword;
+                });
+                passwordSpan.addEventListener('mouseleave', function () {
                     passwordSpan.textContent = '******';
+                });
 
-                    passwordSpan.addEventListener('mouseenter', function () {
-                        passwordSpan.textContent = realPassword;
-                    });
-                    passwordSpan.addEventListener('mouseleave', function () {
-                        passwordSpan.textContent = '******';
-                    });
-                })
-            }
+                // Rellenar los inputs ocultos
+                document.getElementById('edit-nombreusuario').value = json.nombreUsuario;
+                document.getElementById('edit-passworduser').value = realPassword;
+            });
+    }
+    buscarUsuario();
 
-        )}
-        buscarUsuario();
+    // Editar
+        document.getElementById('editar-btn').onclick = function () {
+        document.getElementById('nombreusuario').style.display = 'none';
+        document.getElementById('passworduser').style.display = 'none';
+        document.getElementById('edit-nombreusuario').style.display = 'inline-block';
+        document.getElementById('edit-passworduser').style.display = 'inline-block';
+        document.getElementById('guardar-btn').style.display = 'inline-block';
+        this.style.display = 'none';
+    };
 
+    // Guardar
+    document.getElementById('guardar-btn').onclick = async function () {
+        const nuevoUsuario = document.getElementById('edit-nombreusuario').value;
+        const nuevaContrasena = document.getElementById('edit-passworduser').value;
+
+        // Actualiza en backend (ajusta la URL y método según tu API)
+        await fetch('http://localhost:8080/perfil/' + nombreUsuario, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nombreUsuario: nuevoUsuario,
+                contrasena: nuevaContrasena
+            })
+        });
+
+        // Actualiza la vista
+        document.getElementById('nombreusuario').textContent = nuevoUsuario;
+        document.getElementById('passworduser').textContent = '******';
+
+        // Oculta inputs y muestra spans
+        document.getElementById('nombreusuario').style.display = 'inline-block';
+        document.getElementById('passworduser').style.display = 'inline-block';
+        document.getElementById('edit-nombreusuario').style.display = 'none';
+        document.getElementById('edit-passworduser').style.display = 'none';
+        document.getElementById('guardar-btn').style.display = 'none';
+        document.getElementById('editar-btn').style.display = 'inline-block';
+    };
 </script>
-
 </html>
