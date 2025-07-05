@@ -123,7 +123,7 @@ footer {
   height: 20px;
 }
 
-#boton-volver {
+#boton-volver,.edit-btn, .save-btn {
   background-color: #add8e6;
   color: black;
   padding: 12px 28px;
@@ -952,4 +952,49 @@ select:focus {
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(184, 123, 75, 0.08);
   padding: 32px 28px 24px 28px;
+}
+
+/* Eliminar Perfil */
+#perfiles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 600px;
+    margin: 32px auto;
+}
+
+.perfil-card {
+    position: relative;
+    background: #fff8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 28px 32px 48px 32px;
+    font-family: "Dongle", Arial, sans-serif;
+    font-size: 1.3rem;
+    min-height: 120px;
+}
+
+.perfil-info {
+    margin-bottom: 8px;
+}
+
+.eliminar-btn {
+    position: absolute;
+    right: 24px;
+    bottom: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.icono-papelera {
+    width: 32px;
+    height: 32px;
+    filter: grayscale(0.5);
+    transition: filter 0.2s;
+}
+
+.eliminar-btn:hover .icono-papelera {
+    filter: grayscale(0) drop-shadow(0 0 4px #c92020);
 }
