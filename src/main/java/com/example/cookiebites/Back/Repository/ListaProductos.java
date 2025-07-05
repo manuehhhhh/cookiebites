@@ -58,6 +58,15 @@ public class ListaProductos {
         return null;
     }
 
+    public void eliminarProducto(String nombre) {
+        for (Producto p : listaProductos) {
+            if (p.getNombre().trim().equalsIgnoreCase(nombre.trim())) {
+                listaProductos.remove(p);
+                actualizarProductos();
+            }
+        }
+    }
+
     public ArrayList<Producto> findAll(){
         return this.listaProductos;
     }

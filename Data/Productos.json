@@ -9,13 +9,13 @@
       "Cacao",
       "Chispas de chocolate"
     ],
-    "imagen": "img/galletas/galletachispachoco.jpg"
+    "imagen": "img/galletas/galletaChocolate.png"
   },
   {
     "nombre": "Galleta de Avena",
     "precio": 2.0,
     "ingredientes": ["Avena", "Harina", "Azúcar", "Mantequilla", "Canela"],
-    "imagen": "img/galletas/galletachispachoco.jpg"
+    "imagen": "img/galletas/galletasavena.jpg"
   },
   {
     "nombre": "Galleta de Vainilla",

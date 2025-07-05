@@ -70,6 +70,15 @@ public class ListaUsuarios {
         return usuarioEncontrado;
     }
 
+    public void eliminarPerfil(String dato) {
+        for (Perfil usuario : listaPerfiles) {
+            if (usuario.nombreUsuario.equalsIgnoreCase(dato)) {
+                listaPerfiles.remove(usuario);
+                agregarUsuario();
+            }
+        }
+    }
+
     public ArrayList<Perfil> findAll(){
         return this.listaPerfiles;
     }

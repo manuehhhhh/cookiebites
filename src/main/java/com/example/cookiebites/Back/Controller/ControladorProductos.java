@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,5 +47,11 @@ public class ControladorProductos {
     public void agregarProducto(@RequestBody Producto prod){
         System.out.println(prod.toString());
         this.listaProductos.save(prod);
-    }    
+    }
+    
+    @DeleteMapping("/productos/eliminar/{nombre}")
+        public ResponseEntity<Void> eliminarProducto(@PathVariable String nombre) {
+        listaProductos.eliminarProducto(nombre);
+        return ResponseEntity.noContent().build();
+    }
 }
