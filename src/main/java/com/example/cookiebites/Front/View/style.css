@@ -58,7 +58,7 @@ body {
 }
 
 #catalogo .producto img {
-  width: 120px;
+  width: 100px;
   height: 120px;
   object-fit: cover;
   display: block;
