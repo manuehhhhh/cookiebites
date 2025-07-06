@@ -96,7 +96,7 @@
               )
             ) {
               await fetch(
-                "http://localhost:8080/perfil/eliminar" +
+                "http://localhost:8080/perfil/eliminar/" +
                   encodeURIComponent(perfil.nombreUsuario),
                 { method: "DELETE" }
               );
