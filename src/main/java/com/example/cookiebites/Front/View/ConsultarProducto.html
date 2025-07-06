@@ -71,14 +71,12 @@
   </body>
 
   <script>
-    // brave.exe --user-data-dir="C://Chrome dev session" --disable-web-security "enter url here"
     document.addEventListener("DOMContentLoaded", function () {
       let urlParams = new URLSearchParams(window.location.search);
       let tipoDeUsuario = urlParams.get("perfil");
       let nombreUsuario = urlParams.get("id");
       let nombreProducto = urlParams.get("prod");
       let productoMostrado;
-      // const storedProductJSON = sessionStorage.getItem('currentProduct');
       let precioUnitario = NaN;
 
       document.querySelector(".usuario").src =
@@ -93,74 +91,47 @@
           nombreUsuario;
       });
 
-      function insertarDatos(storedProductJSON) {
-        console.log("a");
-        if (storedProductJSON) {
-          const product = storedProductJSON;
-          productoMostrado = storedProductJSON;
-          const productNameElement =
-            document.getElementById("nombredelproducto");
-          const productPriceElement =
-            document.getElementById("preciodelproducto");
-          const productIngredientsList = document.getElementById(
-            "ingredientesdelproducto"
-          );
-          const productImageElement = document.getElementById("productImage");
+      function insertarDatos(product) {
+        productoMostrado = product;
+        const productNameElement = document.getElementById("nombredelproducto");
+        const productPriceElement = document.getElementById("preciodelproducto");
+        const productIngredientsList = document.getElementById(
+          "ingredientesdelproducto"
+        );
+        const productImageElement = document.getElementById("productImage");
 
-          if (product.imagen) {
-            productImageElement.src = product.imagen;
-          } else {
-            productImageElement.src = "img/galletas/galletaslimon.jpg";
-          }
-          productImageElement.alt = product.nombre || "Imagen del Producto";
-
-          productNameElement.textContent = product.nombre;
-          precioUnitario = parseFloat(product.precio);
-          productPriceElement.textContent = `${precioUnitario}$`;
-
-          // Solo muestra el precio si es válido
-          productPriceElement.textContent =
-            !isNaN(precioUnitario) && precioUnitario > 0
-              ? `${precioUnitario}$`
-              : "";
-
-          productIngredientsList.innerHTML = "";
-          if (product.ingredientes && Array.isArray(product.ingredientes)) {
-            product.ingredientes.forEach((ingredient) => {
-              const listItem = document.createElement("li");
-              listItem.textContent = ingredient;
-              productIngredientsList.appendChild(listItem);
-            });
-          } else {
-            const listItem = document.createElement("li");
-            listItem.textContent = "No hay ingredientes listados.";
-            productIngredientsList.appendChild(listItem);
-          }
-          // sessionStorage.removeItem('selectedProduct');
+        if (product.imagen) {
+          productImageElement.src = product.imagen;
         } else {
-          const productInfoContainer = document.getElementById(
-            "productInfoContainer"
-          );
-          if (productInfoContainer) {
-            productInfoContainer.innerHTML =
-              "<p>No se pudo cargar la información del producto. Por favor, regrese al catálogo y seleccione un producto.</p>";
-          }
-          console.warn(
-            "No product data found in sessionStorage for InterfazInfoProducto.html."
-          );
+          productImageElement.src = "img/galletas/galletaslimon.jpg";
         }
-        console.log("b");
+        productImageElement.alt = product.nombre || "Imagen del Producto";
+
+        productNameElement.textContent = product.nombre;
+        precioUnitario = parseFloat(product.precio);
+        productPriceElement.textContent =
+          !isNaN(precioUnitario) && precioUnitario > 0
+            ? `${precioUnitario}$`
+            : "";
+
+        productIngredientsList.innerHTML = "";
+        if (product.ingredientes && Array.isArray(product.ingredientes)) {
+          product.ingredientes.forEach((ingredient) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = ingredient;
+            productIngredientsList.appendChild(listItem);
+          });
+        } else {
+          const listItem = document.createElement("li");
+          listItem.textContent = "No hay ingredientes listados.";
+          productIngredientsList.appendChild(listItem);
+        }
       }
 
       async function buscarProducto() {
-        console.log("Busando...");
-        let aux;
-        // console.log('http://localhost:8080/productos/' + decodeURIComponent(nombreProducto));
         fetch("http://localhost:8080/productos/buscar/" + nombreProducto)
           .then((response) => response.json())
           .then((json) => insertarDatos(json));
-
-        //return JSON.parse(pediod);
       }
 
       async function agregarCarrito(cant) {
@@ -187,7 +158,6 @@
 
       function actualizarPrecio() {
         const cantidad = parseInt(inputCantidad.value);
-        // Solo muestra el precio si es válido
         if (isNaN(precioUnitario) || precioUnitario <= 0 || isNaN(cantidad)) {
           productPriceElement.textContent = "";
           return;
@@ -218,31 +188,60 @@
         actualizarPrecio();
       });
 
-      // Agregar al carrito
-      document
-        .getElementById("boton-agrergar")
-        .addEventListener("click", () => {
-          console.log("c");
-          // const nombre = document.getElementById('nombredelproducto').textContent;
-          const cantidad = parseInt(
-            document.getElementById("cantidadGalletas").value
-          );
-          // const precioUnitarioActual = precioUnitario;
-          // const imagen = document.getElementById('productImage').src;
+      // Agregar al carrito o editar producto según perfil
+      const botonAgregar = document.getElementById("boton-agrergar");
+      if (tipoDeUsuario === "admin") {
+        // Oculta el selector de cantidad para admin
+        document.querySelector(".contenedor-cantidad").style.display = "none";
+        botonAgregar.innerHTML = "<strong>Editar</strong>";
+        botonAgregar.onclick = async function () {
+          // Convierte los campos a editables
+          const nombreElem = document.getElementById("nombredelproducto");
+          const precioElem = document.getElementById("preciodelproducto");
+          const ingredientesElem = document.getElementById("ingredientesdelproducto");
+          const imagenElem = document.getElementById("productImage");
 
-          // const productoCarrito = {
-          //     nombre: nombre,
-          //     cantidad: cantidad,
-          //     precioUnitario: precioUnitarioActual,
-          //     imagen: imagen
-          // };
+          // Reemplaza por inputs
+          nombreElem.innerHTML = `<input id="input-nombre" value="${nombreElem.textContent}" />`;
+          precioElem.innerHTML = `<input id="input-precio" type="number" min="0" step="0.01" value="${parseFloat(productoMostrado.precio)}" />$`;
 
-          // let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-          // carrito.push(productoCarrito);
-          // localStorage.setItem('carrito', JSON.stringify(carrito));
-          console.log(cantidad);
+          // Ingredientes como textarea
+          let ingredientesText = Array.from(ingredientesElem.querySelectorAll("li")).map(li => li.textContent).join(", ");
+          ingredientesElem.innerHTML = `<textarea id="input-ingredientes" rows="2">${ingredientesText}</textarea>`;
+
+          // Imagen como input
+          imagenElem.insertAdjacentHTML("afterend", `<input id="input-imagen" type="text" value="${imagenElem.src}" style="width:90%" placeholder="URL de la imagen"/>`);
+
+          // Cambia el botón a "Guardar"
+          botonAgregar.innerHTML = "<strong>Guardar</strong>";
+          botonAgregar.onclick = async function () {
+            const nuevoNombre = document.getElementById("input-nombre").value;
+            const nuevoPrecio = parseFloat(document.getElementById("input-precio").value);
+            const nuevosIngredientes = document.getElementById("input-ingredientes").value.split(",").map(i => i.trim());
+            const nuevaImagen = document.getElementById("input-imagen").value;
+
+            // Envía PUT al backend
+            await fetch("http://localhost:8080/productos/editar/" + encodeURIComponent(nombreProducto), {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                nombre: nuevoNombre,
+                precio: nuevoPrecio,
+                ingredientes: nuevosIngredientes,
+                imagen: nuevaImagen
+              }),
+            });
+            alert("Producto actualizado");
+            window.location.reload();
+          };
+        };
+      } else {
+        // Agregar al carrito (cliente)
+        botonAgregar.addEventListener("click", () => {
+          const cantidad = parseInt(document.getElementById("cantidadGalletas").value);
           agregarCarrito(cantidad);
         });
+      }
 
       // Iconos de usuario y carrito
       const usuario = document.querySelector(".usuario");
@@ -272,4 +271,3 @@
       buscarProducto();
     });
   </script>
-</html>

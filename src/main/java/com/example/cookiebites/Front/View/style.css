@@ -986,6 +986,7 @@ select:focus {
     border: none;
     cursor: pointer;
     padding: 0;
+    flex-shrink: 0;
 }
 
 .icono-papelera {
@@ -997,4 +998,72 @@ select:focus {
 
 .eliminar-btn:hover .icono-papelera {
     filter: grayscale(0) drop-shadow(0 0 4px #c92020);
+}
+
+/* VENTA */
+
+.venta-card {
+    position: relative;
+    background: #fff8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 28px 32px 28px 32px;
+    font-family: "Dongle", Arial, sans-serif;
+    font-size: 1.15rem;
+    min-height: 90px;
+    margin: 18px auto;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1.5px solid #e5d0b1;
+    transition: box-shadow 0.2s;
+}
+.venta-card strong {
+    color: #b87b4b;
+    font-weight: bold;
+}
+.venta-card ul {
+    margin: 0 0 0 18px;
+    padding: 0;
+    font-size: 1em;
+}
+.venta-card li {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #a67c52;
+    margin-bottom: 2px;
+}
+
+/* PapepleraVentas */
+.eliminar-btn-producto {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.icono-papelera-producto {
+    width: 50px !important;
+    height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    filter: grayscale(0.5);
+    transition: filter 0.2s;
+    display: block;
+}
+
+.eliminar-btn-producto:hover .icono-papelera-producto {
+    filter: grayscale(0) drop-shadow(0 0 4px #c92020);
+}
+
+.producto {
+    position: relative;
 }

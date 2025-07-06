@@ -31,6 +31,7 @@
       <div class="icons">
         <img src="img/usuario.png" alt="usuario" class="usuario" />
         <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
+        <img src="img/ventas.png" alt="Ventas" class="ventas" />
       </div>
     </header>
     <main>
@@ -54,6 +55,25 @@
     let tipoDeUsuario = urlParams.get("perfil");
     let nombreUsuario = urlParams.get("id");
     let listaCatalogo = document.getElementById("catalogo");
+
+        // Mostrar solo el icono de ventas si eres admin
+    const ventasIcon = document.querySelector(".ventas");
+    const carritoIcon = document.querySelector(".carrito");
+    if (tipoDeUsuario === "admin") {
+      ventasIcon.style.display = "inline";
+      carritoIcon.style.display = "none";
+      ventasIcon.onclick = function () {
+        window.location.href =
+          "ConsultarVenta.html?perfil=admin&id=" + nombreUsuario;
+      };
+    } else {
+      ventasIcon.style.display = "none";
+      carritoIcon.style.display = "inline";
+      carritoIcon.onclick = function () {
+        window.location.href =
+          "Carrito.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+      };
+    }
 
     function llenarListadoProductos(listado) {
       let hijoActual;
@@ -82,6 +102,25 @@
         hijoActual.appendChild(imagen);
         hijoActual.appendChild(nombre);
         hijoActual.appendChild(precio);
+
+          if (tipoDeUsuario === "admin") {
+    const btnEliminar = document.createElement("button");
+    btnEliminar.className = "eliminar-btn-producto";
+    btnEliminar.title = "Eliminar producto";
+    btnEliminar.innerHTML = `<img src="img/papelera.png" alt="Eliminar" class="icono-papelera-producto">`;
+    btnEliminar.onclick = async (e) => {
+      e.stopPropagation();
+      if (confirm(`¿Seguro que deseas eliminar "${producto.nombre}"?`)) {
+        await fetch(
+          "http://localhost:8080/productos/eliminar/" +
+            encodeURIComponent(producto.nombre),
+          { method: "DELETE" }
+        );
+        hijoActual.remove();
+      }
+    };
+    hijoActual.appendChild(btnEliminar);
+  }
 
         hijoActual.addEventListener("click", () => {
           window.location.href =
