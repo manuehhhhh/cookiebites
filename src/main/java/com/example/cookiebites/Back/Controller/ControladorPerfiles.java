@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,5 +58,22 @@ public class ControladorPerfiles {
         listaUsuarios.eliminarPerfil(nombreUsuario);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/perfil/editar/{nombreUsuario}")
+public ResponseEntity<Void> editarPerfil(@PathVariable("nombreUsuario") String nombreUsuario, @RequestBody Perfil perfilEditado) {
+    ArrayList<Perfil> perfiles = listaUsuarios.findAll();
+    for (Perfil usuario : perfiles) {
+        if (usuario.nombreUsuario.equalsIgnoreCase(nombreUsuario)) {
+            usuario.nombre = perfilEditado.nombre;
+            usuario.nombreUsuario = perfilEditado.nombreUsuario;
+            usuario.clave = perfilEditado.clave;
+            usuario.rol = perfilEditado.rol;
+            usuario.correo = perfilEditado.correo;
+            listaUsuarios.agregarUsuario(); // Guarda los cambios en el JSON
+            return ResponseEntity.noContent().build();
+        }
+    }
+    return ResponseEntity.notFound().build();
+}
 
 }

@@ -1,132 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CookieBites</title>
-    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dongle&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
-</head>
+    <link rel="icon" href="img/galletitafavicon.ico" type="/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Dongle&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <header>
-        <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo">
-        <div class="icons">
-            <img src="img/usuario.png" alt="usuario" class="usuario">
-            <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito">
-        </div>
+      <img
+        id="logo"
+        src="img/CookieBitesSinFondo.png"
+        alt="Logo CookieBites"
+        class="logo"
+      />
+      <div class="icons">
+        <img src="img/usuario.png" alt="usuario" class="usuario" />
+        <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
+      </div>
     </header>
 
     <button id="boton-volver">Volver</button>
 
     <main>
-        <h2>PERFIL</h2>
-        <div class="perfil">
-            <img src="img/usuario.png" alt="usuario" class="usuario-perfil">
-            <p><strong>Nombre:</strong> <span class="datos-perfil" id="nombre"></span></p>
-            <p>
-                <strong>Nombre de usuario:</strong>
-                <span class="datos-perfil" id="nombreusuario"></span>
-                <input type="text" id="edit-nombreusuario" class="edit-input" style="display:none;">
-            </p>
-            <p>
-                <strong>Correo:</strong>
-                <span class="datos-perfil" id="emailuser"></span>
-            </p>
-            <p>
-                <strong>Contraseña:</strong>
-                <span class="ver-contrasena" id="passworduser"></span>
-                <input type="text" id="edit-passworduser" class="edit-input" style="display:none;">
-            </p>
-            <button id="editar-btn" class="edit-btn">Editar</button>
-            <button id="guardar-btn" class="save-btn" style="display:none;">Guardar</button>
-        </div>
+      <h2>PERFIL</h2>
+      <div class="perfil">
+        <img src="img/usuario.png" alt="usuario" class="usuario-perfil" />
+        <p>
+          <strong>Nombre:</strong>
+          <span class="datos-perfil" id="nombre"></span>
+        </p>
+        <p>
+          <strong>Nombre de usuario:</strong>
+          <span class="datos-perfil" id="nombreusuario"></span>
+          <input
+            type="text"
+            id="edit-nombreusuario"
+            class="edit-input"
+            style="display: none"
+          />
+        </p>
+        <p>
+          <strong>Correo:</strong>
+          <span class="datos-perfil" id="emailuser"></span>
+        </p>
+        <p>
+          <strong>Contraseña:</strong>
+          <span class="ver-contrasena" id="passworduser"></span>
+          <input
+            type="text"
+            id="edit-passworduser"
+            class="edit-input"
+            style="display: none"
+          />
+        </p>
+        <button id="editar-btn" class="edit-btn">Editar</button>
+        <button id="guardar-btn" class="save-btn" style="display: none">
+          Guardar
+        </button>
+      </div>
     </main>
 
     <footer>
-        <p>© CookieBites</p>
+      <p>© CookieBites</p>
     </footer>
-</body>
+  </body>
 
-<script>
+  <script>
     let urlParams = new URLSearchParams(window.location.search);
-    let tipoDeUsuario = urlParams.get('perfil');
-    let nombreUsuario = urlParams.get('id');
+    let tipoDeUsuario = urlParams.get("perfil");
+    let nombreUsuario = urlParams.get("id");
     localStorage.clear();
-    localStorage.removeItem('currentuser');
+    localStorage.removeItem("currentuser");
 
     let botonVolver = document.getElementById("boton-volver");
-    botonVolver.addEventListener('click', () => {
-        window.location.href = "ConsultarCatalogo.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+    botonVolver.addEventListener("click", () => {
+      window.location.href =
+        "ConsultarCatalogo.html?perfil=" +
+        tipoDeUsuario +
+        "&id=" +
+        nombreUsuario;
     });
 
     async function buscarUsuario() {
-        fetch('http://localhost:8080/perfil/' + nombreUsuario)
-            .then((response) => response.json())
-            .then((json) => {
-                document.getElementById('nombre').textContent = json.nombre;
-                document.getElementById('nombreusuario').textContent = json.nombreUsuario;
-                document.getElementById('emailuser').textContent = json.correo;
-                document.getElementById('passworduser').textContent = '******';
+      fetch("http://localhost:8080/perfil/" + nombreUsuario)
+        .then((response) => response.json())
+        .then((json) => {
+          document.getElementById("nombre").textContent = json.nombre;
+          document.getElementById("nombreusuario").textContent =
+            json.nombreUsuario;
+          document.getElementById("emailuser").textContent = json.correo;
+          document.getElementById("passworduser").textContent = "******";
 
-                // Guardar la contraseña real para mostrarla temporalmente
-                const passwordSpan = document.getElementById('passworduser');
-                const realPassword = json.contrasena;
+          // Guardar la contraseña real para mostrarla temporalmente
+          const passwordSpan = document.getElementById("passworduser");
+          const realPassword = json.clave; // <--- aquí el cambio
 
-                passwordSpan.addEventListener('mouseenter', function () {
-                    passwordSpan.textContent = realPassword;
-                });
-                passwordSpan.addEventListener('mouseleave', function () {
-                    passwordSpan.textContent = '******';
-                });
+          passwordSpan.addEventListener("mouseenter", function () {
+            passwordSpan.textContent = realPassword;
+          });
+          passwordSpan.addEventListener("mouseleave", function () {
+            passwordSpan.textContent = "******";
+          });
 
-                // Rellenar los inputs ocultos
-                document.getElementById('edit-nombreusuario').value = json.nombreUsuario;
-                document.getElementById('edit-passworduser').value = realPassword;
-            });
+          // Rellenar los inputs ocultos
+          document.getElementById("edit-nombreusuario").value =
+            json.nombreUsuario;
+          document.getElementById("edit-passworduser").value = realPassword; // <--- aquí el cambio
+        });
     }
     buscarUsuario();
 
     // Editar
-        document.getElementById('editar-btn').onclick = function () {
-        document.getElementById('nombreusuario').style.display = 'none';
-        document.getElementById('passworduser').style.display = 'none';
-        document.getElementById('edit-nombreusuario').style.display = 'inline-block';
-        document.getElementById('edit-passworduser').style.display = 'inline-block';
-        document.getElementById('guardar-btn').style.display = 'inline-block';
-        this.style.display = 'none';
+    document.getElementById("editar-btn").onclick = function () {
+      document.getElementById("nombreusuario").style.display = "none";
+      document.getElementById("passworduser").style.display = "none";
+      document.getElementById("edit-nombreusuario").style.display =
+        "inline-block";
+      document.getElementById("edit-passworduser").style.display =
+        "inline-block";
+      document.getElementById("guardar-btn").style.display = "inline-block";
+      this.style.display = "none";
     };
 
     // Guardar
-    document.getElementById('guardar-btn').onclick = async function () {
-        const nuevoUsuario = document.getElementById('edit-nombreusuario').value;
-        const nuevaContrasena = document.getElementById('edit-passworduser').value;
+    document.getElementById("guardar-btn").onclick = async function () {
+      const nuevoNombre = document.getElementById("nombre").textContent;
+      const nuevoUsuario = document.getElementById("edit-nombreusuario").value;
+      const nuevaContrasena =
+        document.getElementById("edit-passworduser").value;
+      const nuevoCorreo = document.getElementById("emailuser").textContent;
 
-        // Actualiza en backend (ajusta la URL y método según tu API)
-        await fetch('http://localhost:8080/perfil/' + nombreUsuario, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                nombreUsuario: nuevoUsuario,
-                contrasena: nuevaContrasena
-            })
-        });
+      await fetch("http://localhost:8080/perfil/editar/" + nombreUsuario, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: nuevoNombre,
+          nombreUsuario: nuevoUsuario,
+          clave: nuevaContrasena,
+          rol: tipoDeUsuario,
+          correo: nuevoCorreo,
+        }),
+      });
 
-        // Actualiza la vista
-        document.getElementById('nombreusuario').textContent = nuevoUsuario;
-        document.getElementById('passworduser').textContent = '******';
+      // Si el nombre de usuario cambió, actualiza la variable y la URL
+      if (nuevoUsuario !== nombreUsuario) {
+        nombreUsuario = nuevoUsuario;
+        // Opcional: actualiza la URL para reflejar el nuevo nombre de usuario
+        window.history.replaceState(
+          {},
+          "",
+          `?perfil=${tipoDeUsuario}&id=${nombreUsuario}`
+        );
+      }
 
-        // Oculta inputs y muestra spans
-        document.getElementById('nombreusuario').style.display = 'inline-block';
-        document.getElementById('passworduser').style.display = 'inline-block';
-        document.getElementById('edit-nombreusuario').style.display = 'none';
-        document.getElementById('edit-passworduser').style.display = 'none';
-        document.getElementById('guardar-btn').style.display = 'none';
-        document.getElementById('editar-btn').style.display = 'inline-block';
+      // Vuelve a cargar los datos actualizados desde el backend
+      await buscarUsuario();
+
+      // Oculta inputs y muestra spans
+      document.getElementById("nombreusuario").style.display = "inline-block";
+      document.getElementById("passworduser").style.display = "inline-block";
+      document.getElementById("edit-nombreusuario").style.display = "none";
+      document.getElementById("edit-passworduser").style.display = "none";
+      document.getElementById("guardar-btn").style.display = "none";
+      document.getElementById("editar-btn").style.display = "inline-block";
     };
-</script>
+  </script>
 </html>
