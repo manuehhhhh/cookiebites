@@ -67,27 +67,10 @@
           card.className = "venta-card";
           card.innerHTML = `
             <div><strong># Venta:</strong> ${idx + 1}</div>
-            <div><strong>Cliente:</strong> ${venta.pedido?.nombreUsuario ?? "N/A"}</div>
-            <div><strong>Dirección:</strong> ${venta.pedido?.direccion ?? "N/A"}</div>
-            <div><strong>Fecha de Entrega:</strong> ${venta.pedido?.fechaDeEntrega ?? "N/A"}</div>
             <div><strong>Banco:</strong> ${venta.banco ?? "N/A"}</div>
             <div><strong>Cédula:</strong> ${venta.cedula ?? "N/A"}</div>
             <div><strong>Teléfono:</strong> ${venta.numTelf ?? "N/A"}</div>
             <div><strong>Referencia:</strong> ${venta.numRef ?? "N/A"}</div>
-            <div><strong>Productos:</strong>
-              <ul style="margin:0 0 0 18px;padding:0;">
-                ${
-                  Array.isArray(venta.pedido?.carrito)
-                    ? venta.pedido.carrito
-                        .map(
-                          (item) =>
-                            `<li>${item.cantidad} x ${item.nombreProducto}</li>`
-                        )
-                        .join("")
-                    : "N/A"
-                }
-              </ul>
-            </div>
           `;
           container.appendChild(card);
         });
