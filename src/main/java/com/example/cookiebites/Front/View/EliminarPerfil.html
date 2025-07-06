@@ -71,7 +71,7 @@
 
       // Cargar perfiles desde el backend
       async function cargarPerfiles() {
-        const response = await fetch("http://localhost:8080/perfiles");
+        const response = await fetch("http://localhost:8080/perfil/todos");
         const perfiles = await response.json();
         const container = document.getElementById("perfiles-container");
         container.innerHTML = "";
@@ -96,7 +96,8 @@
               )
             ) {
               await fetch(
-                "http://localhost:8080/perfil/" + perfil.nombreUsuario,
+                "http://localhost:8080/perfil/eliminar" +
+                  encodeURIComponent(perfil.nombreUsuario),
                 { method: "DELETE" }
               );
               cargarPerfiles();
@@ -108,3 +109,4 @@
       cargarPerfiles();
     </script>
   </body>
+</html>
