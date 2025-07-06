@@ -31,6 +31,7 @@
       <div class="icons">
         <img src="img/usuario.png" alt="usuario" class="usuario" />
         <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
+        <img src="img/ventas.png" alt="Ventas" class="ventas" />
       </div>
     </header>
     <main>
@@ -71,6 +72,7 @@
   </body>
 
   <script>
+
     document.addEventListener("DOMContentLoaded", function () {
       let urlParams = new URLSearchParams(window.location.search);
       let tipoDeUsuario = urlParams.get("perfil");
@@ -78,6 +80,7 @@
       let nombreProducto = urlParams.get("prod");
       let productoMostrado;
       let precioUnitario = NaN;
+
 
       document.querySelector(".usuario").src =
         tipoDeUsuario == "cliente" || tipoDeUsuario == "admin"
@@ -90,6 +93,7 @@
           "&id=" +
           nombreUsuario;
       });
+
 
       function insertarDatos(product) {
         productoMostrado = product;
@@ -245,6 +249,34 @@
 
       // Iconos de usuario y carrito
       const usuario = document.querySelector(".usuario");
+      const ventasicon = document.querySelector(".ventas");
+      const carritoIcon = document.querySelector(".carrito");
+      
+      if (tipoDeUsuario === "admin") {
+        ventasicon.style.display = "inline";
+        carritoIcon.style.display = "none";
+        ventasicon.onclick = function () {
+          window.location.href =
+            "ConsultarVenta.html?perfil=admin&id=" + nombreUsuario;
+        };
+        usuario.onclick = function(){
+          window.location.href = "EliminarPerfil.html?perfil=admin&id=" + nombreUsuario; 
+        }
+      } else {
+        ventasicon.style.display = "none";
+        carritoIcon.style.display = "inline";
+        carritoIcon.onclick = function () {
+          window.location.href =
+            "Carrito.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+        };
+        usuario.onclick = function () {
+          let url =
+            tipoDeUsuario == "cliente"  ? "ConsultarPerfil.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario: "LogIn.html";
+            window.location.href = url;
+        };
+      }
+
+      /*
       if (usuario) {
         usuario.onclick = function () {
           let url =
@@ -256,9 +288,8 @@
               : "LogIn.html";
           window.location.href = url;
         };
-      }
+      }*/
 
-      const carritoIcon = document.querySelector(".carrito");
       if (carritoIcon) {
         carritoIcon.onclick = function () {
           window.location.href =
@@ -270,4 +301,6 @@
       }
       buscarProducto();
     });
+
+    
   </script>
