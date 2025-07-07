@@ -978,7 +978,7 @@ select:focus {
     margin-bottom: 8px;
 }
 
-.eliminar-btn {
+.eliminar-btn,.editarcant-btn {
     position: absolute;
     right: 24px;
     bottom: 18px;
@@ -989,15 +989,20 @@ select:focus {
     flex-shrink: 0;
 }
 
-.icono-papelera {
+.icono-papelera, .icono-editar {
     width: 32px;
     height: 32px;
     filter: grayscale(0.5);
     transition: filter 0.2s;
 }
 
-.eliminar-btn:hover .icono-papelera {
+.eliminar-btn:hover .icono-papelera, 
+.editarcant-btn:hover .icono-editar{
     filter: grayscale(0) drop-shadow(0 0 4px #c92020);
+}
+
+.item-carrito > .eliminar-btn, .editarcant-btn{
+  position:static;
 }
 
 /* VENTA */
