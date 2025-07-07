@@ -37,6 +37,19 @@ public class CarritoCompra {
         return total;
     }
 
+    public void eliminarProducto(String nombreProducto) {
+        carrito.removeIf(item -> item.getNombreProducto().equalsIgnoreCase(nombreProducto));
+    }
+
+    public void editarCantidad(String nombreProducto, int nuevaCantidad) {
+        for (CarritoItem item : carrito) {
+            if (item.getNombreProducto().equalsIgnoreCase(nombreProducto)) {
+                item.setCantidad(nuevaCantidad);
+                break;
+            }
+        }
+    }
+
     public ArrayList<CarritoItem> findAll(){
         return this.carrito;
     }   
