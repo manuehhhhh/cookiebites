@@ -16,7 +16,7 @@
   <header>
     <img id="logo" src="img/CookieBitesSinFondo.png" alt="Logo CookieBites" class="logo" />
     <div class="icons">
-      <img src="img/edit.png" alt="Crear cuenta" class="perfil-nuevo" />
+      <img src="img/usuario.png"  alt="usuario" class="usuario" />
       <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
     </div>
   </header>
@@ -219,9 +219,19 @@
         }
 
         crearPedido(pedido);
-      });
+      });  
 
     buscarCarrito();
+
+    const usuario = document.querySelector(".usuario");
+    usuario.onclick = function () {
+        window.location.href = "ConsultarPerfil.html?perfil=cliente&id=" + nombreUsuario;
+    };
+
+    const carritoIcon = document.querySelector(".carrito");
+    carritoIcon.onclick = function () {
+        window.location.href = "Carrito.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+    };
   </script>
 </body>
 

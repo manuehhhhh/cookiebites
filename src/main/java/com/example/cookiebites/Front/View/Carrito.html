@@ -227,6 +227,10 @@
         .querySelector("#boton-crearpedido")
         .addEventListener("click", function (e) {
           e.preventDefault();
+          if(tipoDeUsuario !== "cliente") {
+            alert("Inicie sesion para crear un pedido!");
+            return;
+          }
           if (document.querySelectorAll(".item-carrito").length === 0) {
             alert(
               "El carrito está vacío. Por favor, agrega productos antes de crear un pedido."

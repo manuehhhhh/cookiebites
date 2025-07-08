@@ -231,6 +231,16 @@
             nombreUsuario)
         );
       }
+
+    const usuario = document.querySelector(".usuario");
+    usuario.onclick = function () {
+        window.location.href = "ConsultarPerfil.html?perfil=cliente&id=" + nombreUsuario;
+    };
+
+    const carritoIcon = document.querySelector(".carrito");
+    carritoIcon.onclick = function () {
+        window.location.href = "Carrito.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+    };
     </script>
   </body>
 </html>

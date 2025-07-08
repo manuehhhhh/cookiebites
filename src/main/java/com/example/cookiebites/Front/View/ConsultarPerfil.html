@@ -178,5 +178,10 @@
       document.getElementById("guardar-btn").style.display = "none";
       document.getElementById("editar-btn").style.display = "inline-block";
     };
+
+    const carritoIcon = document.querySelector(".carrito");
+    carritoIcon.onclick = function () {
+        window.location.href = "Carrito.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
+    };
   </script>
 </html>

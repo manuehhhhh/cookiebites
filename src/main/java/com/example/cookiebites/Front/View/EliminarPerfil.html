@@ -32,10 +32,13 @@
         <img src="img/ventas.png" alt="ventas" class="ventas" />
       </div>
     </header>
-    <button id="boton-volver">Volver</button>
+    <main>
+      <button id="boton-volver">Volver</button>
 
     <h2>Perfiles Registrados</h2>
     <div id="perfiles-container"></div>
+    </main>
+    
 
     <footer>
       <p>© CookieBites</p>
@@ -106,7 +109,15 @@
           container.appendChild(card);
         });
       }
+
+      const ventasicon = document.querySelector(".ventas");
+        ventasicon.onclick = function () {
+        window.location.href = "ConsultarVenta.html?perfil=admin&id=" + nombreUsuario;
+    };
+
+
       cargarPerfiles();
+
     </script>
   </body>
 </html>
