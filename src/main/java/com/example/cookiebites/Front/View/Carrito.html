@@ -203,45 +203,7 @@
           });
         });
 
-        /*Funciones para eliminar y editar en el carrito
-      const eliminarbtns = contenedor.querySelectorAll(".eliminar-btn");  
-      eliminarbtns.forEach((btn, idx) =>{
-
-      });
-
-      const editarbtns = contenedor.querySelectorAll(".editarcant-btn");
-      editarbtns.forEach((btn, idx) => {
-        btn.addEventListener("click", function () {
-          const itemDiv = btn.closest(".item-carrito");
-          let cantidadinput = itemDiv.querySelector("input[type='number']");
-          if (cantidadinput) {
-            const nuevaCantidad = parseInt(cantidadinput.value) || 1;
-            const nuevoSpan = document.createElement("span");
-            nuevoSpan.className = "precio-carrito";
-            nuevoSpan.textContent = `${nuevaCantidad} unid`;
-            cantidadinput.replaceWith(nuevoSpan);
-            return;
-          }
-          const cantidadSpan = itemDiv.querySelectorAll(".precio-carrito")[0];
-          const cantidadActual = parseInt(cantidadSpan.textContent) || 1;
-
-          const input = document.createElement("input");
-          input.type = "number";
-          input.min = 1;
-          input.value = cantidadActual;
-          input.style.width = "60px";
-
-          cantidadSpan.replaceWith(input);
-          input.focus();
-
-          input.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-              btn.click();
-            }
-          });
-        });
-      });
-      */
+       
       }
 
       async function buscarCarrito() {

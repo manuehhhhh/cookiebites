@@ -179,6 +179,11 @@
       actualizarPrecio();
     });
 
+    function validarNombreProducto(nombre) {
+    const regex = /^[a-zA-Z\s]+$/;
+    return regex.test(nombre);
+    }
+
     // Agregar al carrito o editar producto según perfil
     const botonAgregar = document.getElementById("boton-agrergar");
     if (tipoDeUsuario === "admin") {
@@ -200,30 +205,42 @@
         let ingredientesText = Array.from(ingredientesElem.querySelectorAll("li")).map(li => li.textContent).join(", ");
         ingredientesElem.innerHTML = `<textarea id="input-ingredientes" rows="2">${ingredientesText}</textarea>`;
 
-        // Imagen como input
-        imagenElem.insertAdjacentHTML("afterend", `<input id="input-imagen" type="text" value="${imagenElem.src}" style="width:90%" placeholder="URL de la imagen"/>`);
-
         // Cambia el botón a "Guardar"
         botonAgregar.innerHTML = "<strong>Guardar</strong>";
         botonAgregar.onclick = async function () {
           const nuevoNombre = document.getElementById("input-nombre").value;
           const nuevoPrecio = parseFloat(document.getElementById("input-precio").value);
           const nuevosIngredientes = document.getElementById("input-ingredientes").value.split(",").map(i => i.trim());
-          const nuevaImagen = document.getElementById("input-imagen").value;
+          const imagengeneral = document.getElementById("productImage");
+
+          if (!validarNombreProducto(nuevoNombre)) {
+            alert("Error: El nombre del solo puede contener letras y espacios. No se permiten otros caracteres.");
+            return; 
+          }
+
+          if (isNaN(nuevoPrecio) || nuevoPrecio <= 0) {
+                alert("Error: El precio del producto debe ser un número mayor que cero.");
+                return; 
+          }
 
           // Envía PUT al backend
-          await fetch("http://localhost:8080/productos/editar/" + encodeURIComponent(nombreProducto), {
+          const response = await fetch("http://localhost:8080/productos/editar/" + encodeURIComponent(nombreProducto), {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               nombre: nuevoNombre,
               precio: nuevoPrecio,
               ingredientes: nuevosIngredientes,
-              imagen: nuevaImagen
+              imagen: imagengeneral.src
             }),
           });
-          alert("Producto actualizado");
-          window.location.reload();
+          if (response.ok){
+            //alert("Producto actualizado");
+            window.location.replace("ConsultarCatalogo.html?perfil=admin&id=" + nombreUsuario);
+          }
+          else {
+            alert("Error al actualizar el producto");
+          }
         };
       };
     } else {
@@ -263,30 +280,6 @@
       };
     }
 
-    /*
-    if (usuario) {
-      usuario.onclick = function () {
-        let url =
-          tipoDeUsuario == "admin" || tipoDeUsuario == "cliente"
-            ? "ConsultarPerfil.html?perfil=" +
-              tipoDeUsuario +
-              "&id=" +
-              nombreUsuario
-            : "LogIn.html";
-        window.location.href = url;
-      };
-    }*/
-
-    /*
-    if (carritoIcon) {
-      carritoIcon.onclick = function () {
-        window.location.href =
-          "ConsultarCatalogo.html?perfil=" +
-          tipoDeUsuario +
-          "&id=" +
-          nombreUsuario;
-      };
-    }*/
     buscarProducto();
   });
 
