@@ -29,6 +29,7 @@
         class="logo"
       />
       <div class="icons">
+        <img src="img/logout.png" alt="Cerrar Sesión" class="logout" />
         <img src="img/usuario.png" alt="usuario" class="usuario" />
         <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
       </div>
@@ -183,5 +184,11 @@
     carritoIcon.onclick = function () {
         window.location.href = "Carrito.html?perfil=" + tipoDeUsuario + "&id=" + nombreUsuario;
     };
+
+    const cierreicon = document.querySelector(".logout");
+        cierreicon.onclick = function () {
+        if(confirm("¿Estas seguro de querer cerrar sesión?"))
+          window.location.href = "ConsultarCatalogo.html";
+      };
   </script>
 </html>

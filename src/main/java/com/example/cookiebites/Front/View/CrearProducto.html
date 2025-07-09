@@ -29,8 +29,9 @@
         class="logo"
       />
       <div class="icons">
-        <img src="img/usuario.png" alt="Crear cuenta" class="usuario" />
-        <img src="img/carrito.png" alt="Carrito de Pedidos" class="carrito" />
+        <img src="img/logout.png" alt="Cerrar Sesión" class="logout" />
+        <img src="img/edit.png" alt="Crear cuenta" class="perfil-nuevo" />
+        <img src="img/ventas.png" alt="ventas" class="ventas" />
       </div>
     </header>
     <main>
@@ -194,5 +195,23 @@
         "&id=" +
         nombreUsuario;
     });
+
+    const editusericon = document.querySelector(".perfil-nuevo");
+    editusericon.onclick = function () {
+      window.location.href = "EliminarPerfil.html?perfil=admin&id=" + nombreUsuario;
+    };
+
+    const cierreicon = document.querySelector(".logout");
+        cierreicon.onclick = function () {
+        if(confirm("¿Estas seguro de querer cerrar sesión?"))
+          window.location.href = "ConsultarCatalogo.html";
+    };
+
+    const ventasicon = document.querySelector(".ventas");
+        ventasicon.onclick = function () {
+        window.location.href = "ConsultarVenta.html?perfil=admin&id=" + nombreUsuario;
+    };
+
+
   </script>
 </html>
